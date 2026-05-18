@@ -93,6 +93,12 @@ if (isset($_SESSION['id_usuario'])) {
                 </button>
 
                 <div style="margin-top:15px; text-align:center;">
+                    <a href="login.php?modo=admin" style="color:#FEA734;">
+                        Entrar como administrador
+                    </a>
+                </div>
+
+                <div style="margin-top:15px; text-align:center;">
                     <a href="cadastro.php" style="color:#FEA734;">
                         Ainda não tenho conta
                     </a>

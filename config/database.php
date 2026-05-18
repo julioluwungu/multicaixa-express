@@ -27,3 +27,4 @@ try {
 }
 
 require_once __DIR__ . '/migrations.php';
+require_once "bootstrap.php";
