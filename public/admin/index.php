@@ -38,6 +38,30 @@ $movimentos = $conn->query("
             padding: 20px;
         }
 
+        .topo-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 20px;
+        }
+
+        .logout-btn {
+            background: #dc2626;
+            color: white;
+            text-decoration: none;
+            padding: 12px 18px;
+            border-radius: 12px;
+            font-weight: bold;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+
+        .logout-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
         .topo {
             margin-bottom: 30px;
         }
@@ -128,6 +152,16 @@ $movimentos = $conn->query("
                 padding: 15px;
             }
 
+            .topo-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .logout-btn {
+                width: 100%;
+                text-align: center;
+            }
+
             .card p {
                 font-size: 22px;
             }
@@ -139,9 +173,22 @@ $movimentos = $conn->query("
 
 <body>
 
-<div class="topo">
-    <h1>Painel Admin</h1>
-    <p>Controle completo do sistema</p>
+<div class="topo-container">
+
+    <div class="topo">
+
+        <h1>Painel Admin</h1>
+
+        <p>
+            Controle completo do sistema
+        </p>
+
+    </div>
+
+    <a href="../../actions/logout.php" class="logout-btn">
+        Sair
+    </a>
+
 </div>
 
 <div class="cards">
