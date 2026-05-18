@@ -37,5 +37,23 @@ $_SESSION["id_usuario"] = $usuario["id"];
 $_SESSION["nome_usuario"] = $usuario["nome"];
 $_SESSION["tipo"] = $usuario["tipo"];
 
-header("Location: ../public/dashboard.php");
-exit;
+/* redirecionamento por tipo */
+
+if ($usuario["tipo"] === "super_admin") {
+
+    header("Location: ../public/admin/index.php");
+    exit;
+
+}
+
+if ($usuario["tipo"] === "admin") {
+
+    header("Location: ../public/admin/index.php");
+    exit;
+
+}
+
+if ($usuario["tipo"] === "user") {
+    header("Location: ../public/dashboard.php");
+    exit;
+}
