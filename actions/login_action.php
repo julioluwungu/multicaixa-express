@@ -17,7 +17,7 @@ if (empty($email) || empty($senha)) {
     exit;
 }
 
-$sql = "SELECT id, nome, email, senha FROM usuarios WHERE email = ?";
+$sql = "SELECT id, nome, email, senha, tipo FROM usuarios WHERE email = ?";
 $stmt = $conn->prepare($sql);
 $stmt->execute([$email]);
 
