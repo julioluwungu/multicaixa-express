@@ -36,7 +36,7 @@ $modo = $_GET["modo"] ?? "user";
                         Login Administrativo
                     </h3>
                 <?php else: ?>
-                    <h3 style="text-align:center;">
+                    <h3 style="color:#FEA734; text-align:center;">
                         Login
                     </h3>
                 <?php endif; ?>
@@ -105,9 +105,21 @@ $modo = $_GET["modo"] ?? "user";
                 </button>
 
                 <div style="margin-top:15px; text-align:center;">
-                    <a href="login.php?modo=admin" style="color:#FEA734;">
-                        Entrar como administrador
-                    </a>
+
+                    <?php if ($modo === "admin"): ?>
+
+                        <a href="login.php?modo=user" style="color:#FEA734;">
+                            Entrar como usuário comum
+                        </a>
+
+                    <?php else: ?>
+
+                        <a href="login.php?modo=admin" style="color:#FEA734;">
+                            Entrar como administrador
+                        </a>
+
+                    <?php endif; ?>
+
                 </div>
 
                 <div style="margin-top:15px; text-align:center;">
