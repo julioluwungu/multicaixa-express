@@ -93,7 +93,7 @@ if (isset($_SESSION['id_usuario'])) {
                 </button>
 
                 <div style="margin-top:15px; text-align:center;">
-                    <a href="register.php" style="color:#FEA734;">
+                    <a href="cadastro.php" style="color:#FEA734;">
                         Ainda não tenho conta
                     </a>
                 </div>

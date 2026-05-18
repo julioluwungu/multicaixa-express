@@ -12,29 +12,31 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 $nome = trim($_POST["nome"]);
 $email = trim($_POST["email"]);
 $telefone = trim($_POST["telefone"]);
-$senha = trim($_POST["senha"]);
+$senha = $_POST["senha"];
+$confirmar = $_POST["confirmar_senha"];
 
-if (empty($nome) || empty($email) || empty($senha)) {
-    die("Preencha todos os campos obrigatórios.");
+if ($senha !== $confirmar) {
+    header("Location: ../public/cadastro.php?erro=senha_diferente");
+    exit;
 }
 
 $sql = "SELECT id FROM usuarios WHERE email = ?";
 $stmt = $conn->prepare($sql);
 $stmt->execute([$email]);
 
-if ($stmt->rowCount() > 0) {
-    die("Este email já está registado.");
+if ($stmt->fetch()) {
+    header("Location: ../public/cadastro.php?erro=email_existe");
+    exit;
 }
 
-$senhaHash = password_hash($senha, PASSWORD_DEFAULT);
+/* segurança extra nível banco */
+$senha_hash = password_hash($senha, PASSWORD_DEFAULT);
 
-$sql = "INSERT INTO usuarios (nome, email, telefone, senha, saldo) VALUES (?, ?, ?, ?, 0.00)";
+$sql = "INSERT INTO usuarios (nome, email, telefone, senha, saldo)
+        VALUES (?, ?, ?, ?, 0)";
+
 $stmt = $conn->prepare($sql);
-$stmt->execute([$nome, $email, $telefone, $senhaHash]);
+$stmt->execute([$nome, $email, $telefone, $senha_hash]);
 
-$userId = $conn->lastInsertId();
-
-$_SESSION["id_usuario"] = $userId;
-
-header("Location: ../public/dashboard.php");
+header("Location: ../public/login.php?sucesso=conta_criada");
 exit;
