@@ -7,6 +7,8 @@ if (isset($_SESSION['id_usuario'])) {
     exit;
 }
 
+$modo = $_GET["modo"] ?? "user";
+
 ?>
 
 <!DOCTYPE html>
@@ -28,6 +30,16 @@ if (isset($_SESSION['id_usuario'])) {
             <h1>Multicaixa Express</h1>
 
             <form action="../actions/login_action.php" method="POST">
+
+                <?php if ($modo === "admin"): ?>
+                    <h3 style="color:#FEA734; text-align:center;">
+                        Login Administrativo
+                    </h3>
+                <?php else: ?>
+                    <h3 style="text-align:center;">
+                        Login
+                    </h3>
+                <?php endif; ?>
                 
                 <?php if (isset($_GET["erro"])): ?>
 
