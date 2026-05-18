@@ -33,3 +33,15 @@ CREATE TABLE IF NOT EXISTS pagamentos (
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE
 );
+
+-- TABELA DE MOVIMENTOS
+CREATE TABLE IF NOT EXISTS movimentos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    tipo ENUM('deposito','levantamento','transferencia','pagamento') NOT NULL,
+    valor DECIMAL(10,2) NOT NULL,
+    descricao VARCHAR(255),
+    id_referencia INT NULL,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE
+);
