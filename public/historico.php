@@ -27,6 +27,14 @@ $stmt->execute([$id_usuario, $id_usuario]);
 
 $transacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+function formatarValor($valor) {
+    return number_format($valor, 2, ",", ".") . " Kz";
+}
+
+function tipoTransacao($t, $id_usuario) {
+    return $t["id_origem"] == $id_usuario ? "saida" : "entrada";
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -34,64 +42,224 @@ $transacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Histórico | Multicaixa Express</title>
 
-    <link rel="stylesheet" href="css/dashboard.css">
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(to bottom right, #050816, #111827);
+            font-family: Arial;
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .topo {
+            margin-bottom: 30px;
+        }
+
+        .topo h1 {
+            color: #FEA734;
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .topo p {
+            color: #9ca3af;
+        }
+
+        .lista {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .card {
+            background: #111827;
+            border-radius: 18px;
+            padding: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 0 15px rgba(0,0,0,0.25);
+        }
+
+        .lado-esquerdo {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+        }
+
+        .icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 22px;
+        }
+
+        .entrada {
+            background: rgba(34, 197, 94, 0.15);
+            color: #22c55e;
+        }
+
+        .saida {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+        }
+
+        .info h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .info p {
+            font-size: 13px;
+            color: #9ca3af;
+        }
+
+        .valor {
+            text-align: right;
+        }
+
+        .valor strong {
+            font-size: 16px;
+            display: block;
+        }
+
+        .entrada-texto {
+            color: #22c55e;
+        }
+
+        .saida-texto {
+            color: #ef4444;
+        }
+
+        .data {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 4px;
+        }
+
+        .vazio {
+            text-align: center;
+            margin-top: 50px;
+            color: #9ca3af;
+        }
+
+        .voltar {
+            display: inline-block;
+            margin-top: 30px;
+            color: #FEA734;
+            text-decoration: none;
+        }
+
+        @media(max-width: 768px) {
+
+            .card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .valor {
+                text-align: left;
+            }
+
+        }
+
+    </style>
+
 </head>
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <div class="card">
+    <div class="topo">
+        <h1>Histórico</h1>
+        <p>Movimentações da sua conta</p>
+    </div>
 
-            <h1>Histórico de Transações</h1>
+    <?php if (count($transacoes) == 0): ?>
 
-            <?php if (count($transacoes) == 0): ?>
-                <p>Nenhuma transação encontrada.</p>
-            <?php else: ?>
+        <div class="vazio">
+            Nenhuma transação encontrada.
+        </div>
 
-                <?php foreach ($transacoes as $t): ?>
+    <?php else: ?>
 
-                    <div class="transacao">
+        <div class="lista">
 
-                        <p>
-                            <strong>Valor:</strong>
-                            <?= number_format($t["valor"], 2, ",", ".") ?> Kz
-                        </p>
+            <?php foreach ($transacoes as $t): ?>
 
-                        <p>
-                            <strong>De:</strong>
-                            <?= htmlspecialchars($t["remetente"]) ?>
-                        </p>
+                <?php
+                    $tipo = tipoTransacao($t, $id_usuario);
+                    $entrada = $tipo == "entrada";
+                ?>
 
-                        <p>
-                            <strong>Para:</strong>
-                            <?= htmlspecialchars($t["destinatario"]) ?>
-                        </p>
+                <div class="card">
 
-                        <p>
-                            <strong>Descrição:</strong>
-                            <?= htmlspecialchars($t["descricao"]) ?>
-                        </p>
+                    <div class="lado-esquerdo">
 
-                        <hr>
+                        <div class="icon <?= $tipo ?>">
+                            <?= $entrada ? "↓" : "↑" ?>
+                        </div>
+
+                        <div class="info">
+
+                            <h3>
+                                <?= $entrada ? "Recebido de" : "Enviado para" ?>
+                            </h3>
+
+                            <p>
+                                <?= htmlspecialchars(
+                                    $entrada ? $t["remetente"] : $t["destinatario"]
+                                ) ?>
+                            </p>
+
+                        </div>
 
                     </div>
 
-                <?php endforeach; ?>
+                    <div class="valor">
 
-            <?php endif; ?>
+                        <strong class="<?= $tipo ?>-texto">
+                            <?= $entrada ? "+" : "-" ?>
+                            <?= formatarValor($t["valor"]) ?>
+                        </strong>
 
-            <br>
+                        <div class="data">
+                            <?= date("d/m/Y H:i", strtotime($t["criado_em"])) ?>
+                        </div>
 
-            <a href="dashboard.php" style="color:#FEA734; text-decoration:none;">
-                Voltar
-            </a>
+                    </div>
+
+                </div>
+
+            <?php endforeach; ?>
 
         </div>
 
-    </div>
+    <?php endif; ?>
+
+    <a href="dashboard.php" class="voltar">
+        ← Voltar ao Dashboard
+    </a>
+
+</div>
 
 </body>
 </html>
