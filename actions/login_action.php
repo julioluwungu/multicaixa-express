@@ -13,7 +13,8 @@ $email = trim($_POST["email"]);
 $senha = trim($_POST["senha"]);
 
 if (empty($email) || empty($senha)) {
-    die("Preencha todos os campos.");
+    header("Location: ../public/login.php?erro=preencher");
+    exit;
 }
 
 $sql = "SELECT id, nome, email, senha FROM usuarios WHERE email = ?";
@@ -23,11 +24,13 @@ $stmt->execute([$email]);
 $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$usuario) {
-    die("Utilizador não encontrado.");
+    header("Location: ../public/login.php?erro=nao_encontrado");
+    exit;
 }
 
 if (!password_verify($senha, $usuario["senha"])) {
-    die("Senha incorreta.");
+    header("Location: ../public/login.php?erro=senha_incorreta");
+    exit;
 }
 
 $_SESSION["id_usuario"] = $usuario["id"];

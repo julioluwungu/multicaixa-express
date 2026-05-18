@@ -28,6 +28,41 @@ if (isset($_SESSION['id_usuario'])) {
             <h1>Multicaixa Express</h1>
 
             <form action="../actions/login_action.php" method="POST">
+                
+                <?php if (isset($_GET["erro"])): ?>
+
+                    <div style="
+                        background:#7f1d1d;
+                        color:#fff;
+                        padding:10px;
+                        border-radius:8px;
+                        margin-bottom:15px;
+                        font-size:14px;
+                    ">
+
+                        <?php
+                        switch ($_GET["erro"]) {
+
+                            case "preencher":
+                                echo "Preencha todos os campos.";
+                                break;
+
+                            case "nao_encontrado":
+                                echo "Utilizador não encontrado.";
+                                break;
+
+                            case "senha_incorreta":
+                                echo "Senha incorreta.";
+                                break;
+
+                            default:
+                                echo "Erro ao fazer login.";
+                        }
+                        ?>
+
+                    </div>
+
+                <?php endif; ?>
 
                 <div class="input-group">
                     <label for="email">Email</label>
@@ -56,6 +91,12 @@ if (isset($_SESSION['id_usuario'])) {
                 <button type="submit">
                     Entrar
                 </button>
+
+                <div style="margin-top:15px; text-align:center;">
+                    <a href="register.php" style="color:#FEA734;">
+                        Ainda não tenho conta
+                    </a>
+                </div>
 
             </form>
 
