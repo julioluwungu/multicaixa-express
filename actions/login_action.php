@@ -35,6 +35,7 @@ if (!password_verify($senha, $usuario["senha"])) {
 
 $_SESSION["id_usuario"] = $usuario["id"];
 $_SESSION["nome_usuario"] = $usuario["nome"];
+$_SESSION["tipo"] = $usuario["tipo"];
 
 header("Location: ../public/dashboard.php");
 exit;
