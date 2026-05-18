@@ -57,3 +57,6 @@ if ($usuario["tipo"] === "user") {
     header("Location: ../public/dashboard.php");
     exit;
 }
+
+header("Location: ../public/login.php");
+exit;
