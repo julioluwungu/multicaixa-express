@@ -118,6 +118,16 @@ $usuarios = $conn->query("
             transform: translateY(-2px);
         }
 
+        .admin-btn {
+            background: #2563eb;
+            color: white;
+        }
+
+        .delete-btn {
+            background: #dc2626;
+            color: white;
+        }
+
         @media(max-width: 768px) {
 
             body {
@@ -168,6 +178,30 @@ $usuarios = $conn->query("
                 <a href="depositar.php?id=<?= $u["id"] ?>" class="btn">
                     Depositar
                 </a>
+
+                <?php if ($u["tipo"] === "user"): ?>
+
+                    <a
+                        href="../../actions/promover_admin.php?id=<?= $u["id"] ?>"
+                        class="btn admin-btn"
+                        onclick="return confirm('Promover este usuário para admin?')"
+                    >
+                        Promover
+                    </a>
+
+                <?php endif; ?>
+
+                <?php if ($u["tipo"] !== "super_admin"): ?>
+
+                    <a
+                        href="../../actions/eliminar_usuario.php?id=<?= $u["id"] ?>"
+                        class="btn delete-btn"
+                        onclick="return confirm('Tem certeza que deseja eliminar esta conta?')"
+                    >
+                        Eliminar
+                    </a>
+
+                <?php endif; ?>
 
             </div>
 
