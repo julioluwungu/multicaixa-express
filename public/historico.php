@@ -222,7 +222,27 @@ function tipoTransacao($t, $id_usuario) {
 
                             <?php
 
-                                $isPagamento = empty($t["id_destino"]);
+                                $isPagamento =
+
+                                    empty($t["id_destino"])
+
+                                    &&
+
+                                    str_contains(
+                                        strtolower($t["descricao"]),
+                                        "pagamento"
+                                    );
+
+                                $isLevantamento =
+
+                                    empty($t["id_destino"])
+
+                                    &&
+
+                                    str_contains(
+                                        strtolower($t["descricao"]),
+                                        "levantamento"
+                                    );
 
                                 if ($isPagamento) {
 
@@ -230,6 +250,18 @@ function tipoTransacao($t, $id_usuario) {
 
                                     $nome = str_replace(
                                         "Pagamento: ",
+                                        "",
+                                        $t["descricao"]
+                                    );
+
+                                }
+
+                                elseif ($isLevantamento) {
+
+                                    $titulo = "Levantamento";
+
+                                    $nome = str_replace(
+                                        "Levantamento: ",
                                         "",
                                         $t["descricao"]
                                     );

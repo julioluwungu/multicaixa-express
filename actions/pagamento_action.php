@@ -162,7 +162,22 @@ $empresas = [
 
 /* guardar transação */
 
-$empresaNome = $empresas[$servico][$referencia] . " - " . $referencia;
+$servicosFormatados = [
+
+    "energia" => "Energia",
+    "internet" => "Internet",
+    "agua" => "Água",
+    "tv" => "TV"
+
+];
+
+$empresaNome =
+
+    $servicosFormatados[$servico]
+
+    . " - "
+
+    . $referencia;
 
 $sql = "
     INSERT INTO transacoes
