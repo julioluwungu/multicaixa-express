@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
     telefone VARCHAR(20),
     senha VARCHAR(255) NOT NULL,
     saldo DECIMAL(10,2) DEFAULT 0,
-    tipo ENUM('user','admin','super_admin') DEFAULT 'user'
+    tipo ENUM('user','admin','super_admin') DEFAULT 'user',
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
