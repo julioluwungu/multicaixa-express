@@ -11,11 +11,7 @@ if (!isset($_SESSION["id_usuario"])) {
 }
 
 $id = $_SESSION["id_usuario"];
-
 $sql = "SELECT saldo FROM usuarios WHERE id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->execute([$id]);
-
-echo json_encode([
-    "saldo" => $stmt->fetchColumn()
-]);
+echo json_encode(["saldo" => $stmt->fetchColumn()]);
