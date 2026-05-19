@@ -18,9 +18,7 @@ $movimentos = $conn->query("
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movimentos</title>
-
     <style>
-
         body {
             background: #050816;
             font-family: Arial;
@@ -88,66 +86,39 @@ $movimentos = $conn->query("
         }
 
         @media(max-width: 768px) {
-
             body {
                 padding: 15px;
             }
-
         }
-
     </style>
 </head>
-
 <body>
-
 <div class="topo">
-
     <h1>Movimentos</h1>
-
     <p>Histórico financeiro do sistema</p>
-
-    <a href="index.php" class="voltar">
-        ← Voltar ao painel
-    </a>
-
+    <a href="index.php" class="voltar">← Voltar ao painel</a>
 </div>
-
 <div class="movimentos-container">
 
     <?php if (count($movimentos) > 0): ?>
-
         <?php foreach ($movimentos as $m): ?>
 
             <div class="movimento-card">
-
-                <div class="nome">
-                    <?= htmlspecialchars($m["nome"]) ?>
-                </div>
-
-                <div class="tipo">
-                    <?= strtoupper($m["tipo"]) ?>
-                </div>
-
-                <div class="valor">
-                    <?= number_format($m["valor"], 2, ',', '.') ?> Kz
-                </div>
+                <div class="nome"><?= htmlspecialchars($m["nome"]) ?></div>
+                <div class="tipo"><?= strtoupper($m["tipo"]) ?></div>
+                <div class="valor"><?= number_format($m["valor"], 2, ',', '.') ?> Kz</div>
 
                 <?php if (!empty($m["descricao"])): ?>
 
-                    <div class="descricao">
-                        <?= htmlspecialchars($m["descricao"]) ?>
-                    </div>
+                    <div class="descricao"><?= htmlspecialchars($m["descricao"]) ?></div>
 
                 <?php endif; ?>
 
-                <div class="data">
-                    <?= $m["criado_em"] ?>
-                </div>
+                <div class="data"><?= $m["criado_em"] ?></div>
 
             </div>
 
         <?php endforeach; ?>
-
     <?php else: ?>
 
         <p>Nenhum movimento encontrado.</p>

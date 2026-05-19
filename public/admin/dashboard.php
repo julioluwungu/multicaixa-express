@@ -8,18 +8,12 @@ require_once "../../config/database.php";
 <head>
     <meta charset="UTF-8">
     <title>Admin | Multicaixa Express</title>
-
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-
 <div class="container">
-
     <h2 style="color:#FEA734;">Painel Admin</h2>
-
     <a href="depositar.php" class="action">Fazer Depósito</a>
-
 </div>
-
 </body>
 </html>

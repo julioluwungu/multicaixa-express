@@ -4,10 +4,7 @@ require_once "../../includes/admin_auth.php";
 require_once "../../config/database.php";
 
 $totalUsers = $conn->query("SELECT COUNT(*) FROM usuarios")->fetchColumn();
-
-$totalSaldo = $conn->query("
-    SELECT SUM(saldo) FROM usuarios
-")->fetchColumn();
+$totalSaldo = $conn->query("SELECT SUM(saldo) FROM usuarios")->fetchColumn();
 
 $movimentos = $conn->query("
     SELECT m.*, u.nome
@@ -25,11 +22,8 @@ $movimentos = $conn->query("
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel Admin</title>
-
     <link rel="stylesheet" href="../css/style.css">
-
     <style>
-
         body {
             background: #050816;
             font-family: Arial;
@@ -147,7 +141,6 @@ $movimentos = $conn->query("
         }
 
         @media(max-width: 768px) {
-
             body {
                 padding: 15px;
             }
@@ -165,84 +158,45 @@ $movimentos = $conn->query("
             .card p {
                 font-size: 22px;
             }
-
         }
-
     </style>
 </head>
-
 <body>
-
 <div class="topo-container">
-
     <div class="topo">
-
         <h1>Painel Admin</h1>
-
-        <p>
-            Controle completo do sistema
-        </p>
-
+        <p>Controle completo do sistema</p>
     </div>
-
-    <a href="../../actions/logout.php" class="logout-btn">
-        Sair
-    </a>
-
+    <a href="../../actions/logout.php" class="logout-btn">Sair</a>
 </div>
-
 <div class="cards">
-
     <div class="card">
         <h3>Total de Usuários</h3>
         <p><?= $totalUsers ?></p>
     </div>
-
     <div class="card">
         <h3>Saldo Total</h3>
         <p><?= number_format($totalSaldo, 2, ',', '.') ?> Kz</p>
     </div>
-
 </div>
-
 <div class="actions">
-
-    <a href="usuarios.php" class="action-btn">
-        Gerir Usuários
-    </a>
-
-    <a href="depositar.php" class="action-btn">
-        Fazer Depósito
-    </a>
-
-    <a href="movimentos.php" class="action-btn">
-        Ver Movimentos
-    </a>
-
+    <a href="usuarios.php" class="action-btn">Gerir Usuários</a>
+    <a href="depositar.php" class="action-btn">Fazer Depósito</a>
+    <a href="movimentos.php" class="action-btn">Ver Movimentos</a>
 </div>
-
 <div class="movimentos">
-
     <h2>Últimos Movimentos</h2>
 
     <?php if (count($movimentos) > 0): ?>
-
         <?php foreach ($movimentos as $m): ?>
 
             <div class="movimento">
-
                 <strong><?= $m["nome"] ?></strong><br>
-
-                <span class="tipo">
-                    <?= ucfirst($m["tipo"]) ?>
-                </span>
-
+                <span class="tipo"><?= ucfirst($m["tipo"]) ?></span>
                 — <?= number_format($m["valor"], 2, ',', '.') ?> Kz
-
             </div>
 
         <?php endforeach; ?>
-
     <?php else: ?>
 
         <p>Nenhum movimento encontrado.</p>
@@ -250,6 +204,5 @@ $movimentos = $conn->query("
     <?php endif; ?>
 
 </div>
-
 </body>
 </html>

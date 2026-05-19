@@ -10,9 +10,7 @@ require_once "../../includes/admin_auth.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Depósito Admin</title>
-
     <style>
-
         body {
             background: #050816;
             font-family: Arial;
@@ -96,7 +94,6 @@ require_once "../../includes/admin_auth.php";
         }
 
         .erro-box {
-
             background: rgba(239, 68, 68, 0.15);
             border: 1px solid rgba(239, 68, 68, 0.3);
             color: #ef4444;
@@ -104,11 +101,9 @@ require_once "../../includes/admin_auth.php";
             border-radius: 14px;
             margin-bottom: 20px;
             font-size: 14px;
-
         }
 
         .sucesso-box {
-
             background: rgba(34, 197, 94, 0.15);
             border: 1px solid rgba(34, 197, 94, 0.3);
             color: #22c55e;
@@ -116,34 +111,24 @@ require_once "../../includes/admin_auth.php";
             border-radius: 14px;
             margin-bottom: 20px;
             font-size: 14px;
-
         }
 
     </style>
 </head>
-
 <body>
-
 <div class="card">
-
     <h1>Depósito</h1>
-
     <?php if (isset($_GET["erro"])): ?>
-
         <div class="erro-box">
-
             <?php
 
             switch ($_GET["erro"]) {
-
                 case "nao_encontrado":
                     echo "Usuário não encontrado.";
                     break;
-
                 case "campos":
                     echo "Preencha os campos corretamente.";
                     break;
-
                 default:
                     echo "Erro ao realizar depósito.";
             }
@@ -153,40 +138,25 @@ require_once "../../includes/admin_auth.php";
         </div>
 
     <?php endif; ?>
-
     <?php if (isset($_GET["sucesso"])): ?>
-
-        <div class="sucesso-box">
-            Depósito realizado com sucesso.
-        </div>
-
+        <div class="sucesso-box">Depósito realizado com sucesso.</div>
     <?php endif; ?>
 
     <p>Adicionar saldo a um usuário</p>
 
     <form action="../../actions/admin_depositar.php" method="POST">
-
         <div class="input-group">
             <label>Email do usuário</label>
             <input type="email" name="email" required>
         </div>
-
         <div class="input-group">
             <label>Valor</label>
             <input type="number" name="valor" step="0.01" required>
         </div>
-
-        <button type="submit">
-            Realizar Depósito
-        </button>
-
+        <button type="submit">Realizar Depósito</button>
     </form>
 
-    <a href="index.php" class="voltar">
-        ← Voltar ao painel
-    </a>
-
+    <a href="index.php" class="voltar">← Voltar ao painel</a>
 </div>
-
 </body>
 </html>

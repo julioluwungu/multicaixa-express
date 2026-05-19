@@ -17,9 +17,7 @@ $usuarios = $conn->query("
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuários | Admin</title>
-
     <style>
-
         body {
             background: #050816;
             font-family: Arial;
@@ -128,71 +126,38 @@ $usuarios = $conn->query("
             body {
                 padding: 15px;
             }
-
         }
-
     </style>
 </head>
-
 <body>
-
 <div class="topo">
-
     <h1>Gerir Usuários</h1>
-
     <p>Controle das contas do sistema</p>
-
-    <a href="index.php" class="voltar">
-        ← Voltar ao painel
-    </a>
-
+    <a href="index.php" class="voltar">← Voltar ao painel</a>
 </div>
-
 <div class="usuarios-grid">
 
     <?php foreach ($usuarios as $u): ?>
 
         <div class="usuario-card">
-
             <h2><?= htmlspecialchars($u["nome"]) ?></h2>
-
-            <div class="info">
-                <?= htmlspecialchars($u["email"]) ?>
-            </div>
-
-            <div class="saldo">
-                <?= number_format($u["saldo"], 2, ',', '.') ?> Kz
-            </div>
-
-            <span class="badge <?= $u["tipo"] ?>">
-                <?= strtoupper($u["tipo"]) ?>
-            </span>
-
+            <div class="info"><?= htmlspecialchars($u["email"]) ?></div>
+            <div class="saldo"><?= number_format($u["saldo"], 2, ',', '.') ?> Kz</div>
+            <span class="badge <?= $u["tipo"] ?>"><?= strtoupper($u["tipo"]) ?></span>
             <div class="acoes">
-
-                <a href="depositar.php?id=<?= $u["id"] ?>" class="btn">
-                    Depositar
-                </a>
+                <a href="depositar.php?id=<?= $u["id"] ?>" class="btn">Depositar</a>
 
                 <?php if ($u["tipo"] !== "super_admin"): ?>
 
-                    <a
-                        href="../../actions/eliminar_usuario.php?id=<?= $u["id"] ?>"
-                        class="btn delete-btn"
-                        onclick="return confirm('Tem certeza que deseja eliminar esta conta?')"
-                    >
-                        Eliminar
-                    </a>
+                    <a href="../../actions/eliminar_usuario.php?id=<?= $u["id"] ?>" class="btn delete-btn" onclick="return confirm('Tem certeza que deseja eliminar esta conta?')">Eliminar</a>
 
                 <?php endif; ?>
 
             </div>
-
         </div>
 
     <?php endforeach; ?>
 
 </div>
-
 </body>
 </html>
