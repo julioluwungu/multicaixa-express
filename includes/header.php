@@ -9,11 +9,8 @@ if (session_status() === PHP_SESSION_NONE) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Multicaixa Express</title>
-
     <link rel="stylesheet" href="css/style.css">
-
     <style>
         .topbar {
             background: #111827;
@@ -58,7 +55,6 @@ if (session_status() === PHP_SESSION_NONE) {
             color: #FEA734;
         }
 
-        /* MOBILE */
         @media (max-width: 768px) {
 
             .menu {
@@ -83,25 +79,13 @@ if (session_status() === PHP_SESSION_NONE) {
             }
         }
     </style>
-
 </head>
-
 <body>
-
 <header class="topbar">
     <div class="container">
-
-        <div class="logo">
-            <h2>Multicaixa</h2>
-        </div>
-
-        <div class="menu-toggle" onclick="toggleMenu()">
-            ☰
-        </div>
-
+        <div class="logo"><h2>Multicaixa</h2></div>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
         <?php include "navbar.php"; ?>
-
     </div>
 </header>
-
 <main class="container">
