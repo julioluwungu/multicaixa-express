@@ -41,6 +41,22 @@ $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
             margin-bottom: 20px;
         }
 
+        .logout-btn {
+            background: #dc2626;
+            color: white;
+            text-decoration: none;
+            padding: 12px 18px;
+            border-radius: 12px;
+            font-weight: bold;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+
+        .logout-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
         .user {
             font-size: 14px;
             color: #CBD5E1;
@@ -126,7 +142,7 @@ $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
             <div class="user"><?= htmlspecialchars($usuario["email"]) ?></div>
         </div>
 
-        <a href="../actions/logout.php" style="color:#FEA734;">Sair</a>
+        <a href="../actions/logout.php" class="logout-btn">Sair</a>
     </div>
 
     <div class="card-saldo">
