@@ -29,7 +29,7 @@ try {
     if ($isLocal) {
         $conn = new PDO("mysql:host=$host;charset=utf8mb4", $user, $pass);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+        
         $conn->exec("CREATE DATABASE IF NOT EXISTS $dbname CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci");
         $conn->exec("USE $dbname");
     } else {

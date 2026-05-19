@@ -5,17 +5,8 @@ $username = "root";
 $password = "";
 
 try {
-
-    $conn = new PDO(
-        "mysql:host=$host;charset=utf8",
-        $username,
-        $password
-    );
-
-    $conn->setAttribute(
-        PDO::ATTR_ERRMODE,
-        PDO::ERRMODE_EXCEPTION
-    );
+    $conn = new PDO("mysql:host=$host;charset=utf8", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $sql = "
         CREATE DATABASE IF NOT EXISTS multicaixa_express
@@ -26,7 +17,5 @@ try {
     $conn->exec($sql);
 
 } catch (PDOException $erro) {
-
     die("Erro ao criar banco: " . $erro->getMessage());
-
 }

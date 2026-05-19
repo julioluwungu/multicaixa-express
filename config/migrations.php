@@ -3,7 +3,6 @@
 require_once __DIR__ . '/database.php';
 
 $sql = "
-
 CREATE TABLE IF NOT EXISTS usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
@@ -46,7 +45,6 @@ CREATE TABLE IF NOT EXISTS movimentos (
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE
 );
-
 ";
 
 $conn->exec($sql);
