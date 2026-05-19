@@ -220,14 +220,42 @@ function tipoTransacao($t, $id_usuario) {
 
                         <div class="info">
 
+                            <?php
+
+                                $isPagamento = empty($t["id_destino"]);
+
+                                if ($isPagamento) {
+
+                                    $titulo = "Pagamento";
+
+                                    $nome = str_replace(
+                                        "Pagamento: ",
+                                        "",
+                                        $t["descricao"]
+                                    );
+
+                                }
+
+                                else {
+
+                                    $titulo = $entrada
+                                        ? "Recebido de"
+                                        : "Enviado para";
+
+                                    $nome = $entrada
+                                        ? $t["remetente"]
+                                        : $t["destinatario"];
+
+                                }
+
+                            ?>
+
                             <h3>
-                                <?= $entrada ? "Recebido de" : "Enviado para" ?>
+                                <?= $titulo ?>
                             </h3>
 
                             <p>
-                                <?= htmlspecialchars(
-                                    $entrada ? $t["remetente"] : $t["destinatario"]
-                                ) ?>
+                                <?= htmlspecialchars($nome) ?>
                             </p>
 
                         </div>

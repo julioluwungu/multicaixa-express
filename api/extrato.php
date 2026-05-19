@@ -61,7 +61,7 @@ foreach ($transacoes as $t) {
 
     $tipo = "";
 
-    if ($t["id_destino"] === null) {
+    if (empty($t["id_destino"])) {
 
         $tipo = "saida";
 
