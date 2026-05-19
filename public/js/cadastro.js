@@ -4,7 +4,6 @@ const forca = document.getElementById("forcaSenha");
 const match = document.getElementById("matchSenha");
 
 senha.addEventListener("input", function () {
-
     const value = senha.value;
     let strength = 0;
 
@@ -26,7 +25,6 @@ senha.addEventListener("input", function () {
 });
 
 confirmar.addEventListener("input", function () {
-
     if (confirmar.value === senha.value) {
         match.textContent = "As senhas coincidem";
         match.style.color = "#22c55e";
