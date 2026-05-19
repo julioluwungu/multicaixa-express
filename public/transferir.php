@@ -144,6 +144,31 @@ $id_usuario = $_SESSION["id_usuario"];
             line-height: 1.5;
         }
 
+        .erro {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+            padding: 14px;
+            border-radius: 14px;
+            margin-bottom: 22px;
+            font-size: 14px;
+            animation: aparecer 0.3s ease;
+        }
+
+        @keyframes aparecer {
+
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
         @media(max-width: 768px) {
 
             .card {
