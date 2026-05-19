@@ -31,6 +31,12 @@ $modo = $_GET["modo"] ?? "user";
 
             <form action="../actions/login_action.php" method="POST">
 
+                <input
+                    type="hidden"
+                    name="modo"
+                    value="<?= $modo ?>"
+                >
+
                 <?php if ($modo === "admin"): ?>
                     <h3 style="color:#FEA734; text-align:center;">
                         Login Administrativo
@@ -65,6 +71,14 @@ $modo = $_GET["modo"] ?? "user";
 
                             case "senha_incorreta":
                                 echo "Senha incorreta.";
+                                break;
+
+                            case "sem_permissao":
+                                echo "Esta conta não possui acesso administrativo.";
+                                break;
+
+                            case "admin_nao":
+                                echo "Administradores devem usar o login administrativo.";
                                 break;
 
                             default:
