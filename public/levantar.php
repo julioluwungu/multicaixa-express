@@ -132,6 +132,31 @@ $id_usuario = $_SESSION["id_usuario"];
             font-size: 30px;
         }
 
+        .erro {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+            padding: 14px;
+            border-radius: 14px;
+            margin-bottom: 22px;
+            font-size: 14px;
+            animation: aparecer 0.3s ease;
+        }
+
+        @keyframes aparecer {
+
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
         @media(max-width: 768px) {
 
             .card {
@@ -158,6 +183,37 @@ $id_usuario = $_SESSION["id_usuario"];
         <div class="topo">
 
             <h1>Levantar Dinheiro</h1>
+
+            <?php if (isset($_GET["erro"])): ?>
+
+                <div class="erro">
+
+                    <?php
+
+                        switch ($_GET["erro"]) {
+
+                            case "saldo":
+                                echo "Saldo insuficiente.";
+                                break;
+
+                            case "valor":
+                                echo "Valor inválido.";
+                                break;
+
+                            case "conta":
+                                echo "Conta não encontrada.";
+                                break;
+
+                            default:
+                                echo "Erro ao realizar levantamento.";
+
+                        }
+
+                    ?>
+
+                </div>
+
+            <?php endif; ?>
 
             <p>
                 Faça levantamentos diretamente da sua conta

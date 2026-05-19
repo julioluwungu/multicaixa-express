@@ -178,6 +178,49 @@ $id_usuario = $_SESSION["id_usuario"];
 
         </div>
 
+        <?php if (isset($_GET["erro"])): ?>
+
+            <div class="erro">
+
+                <?php
+
+                    switch ($_GET["erro"]) {
+
+                        case "saldo":
+                            echo "Saldo insuficiente.";
+                            break;
+
+                        case "valor":
+                            echo "Valor inválido.";
+                            break;
+
+                        case "email":
+                            echo "Informe o email do destinatário.";
+                            break;
+
+                        case "destino":
+                            echo "Destinatário não encontrado.";
+                            break;
+
+                        case "origem":
+                            echo "Conta de origem não encontrada.";
+                            break;
+
+                        case "proprio":
+                            echo "Não pode transferir para si mesmo.";
+                            break;
+
+                        default:
+                            echo "Erro ao realizar transferência.";
+
+                    }
+
+                ?>
+
+            </div>
+
+        <?php endif; ?>
+
         <div class="info-box">
             Certifique-se de que o email do destinatário está correto
             antes de confirmar a transferência.

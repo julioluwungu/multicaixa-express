@@ -15,16 +15,23 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 }
 
 $id_usuario = $_SESSION["id_usuario"];
+
 $servico = trim($_POST["servico"]);
 $referencia = trim($_POST["referencia"]);
 $valor = floatval($_POST["valor"]);
 
 if ($valor <= 0) {
-    die("Valor inválido.");
+
+    header("Location: ../public/pagar.php?erro=valor");
+    exit;
+
 }
 
 if (empty($servico) || empty($referencia)) {
-    die("Preencha todos os campos.");
+
+    header("Location: ../public/pagar.php?erro=campos");
+    exit;
+
 }
 
 $conn->beginTransaction();
@@ -32,29 +39,66 @@ $conn->beginTransaction();
 $sql = "SELECT saldo FROM usuarios WHERE id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->execute([$id_usuario]);
+
 $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$usuario) {
-    die("Utilizador não encontrado.");
+
+    header("Location: ../public/pagar.php?erro=usuario");
+    exit;
+
 }
 
 if ($usuario["saldo"] < $valor) {
-    die("Saldo insuficiente.");
+
+    header("Location: ../public/pagar.php?erro=saldo");
+    exit;
+
 }
 
-$sql = "UPDATE usuarios SET saldo = saldo - ? WHERE id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->execute([$valor, $id_usuario]);
+$sql = "
+    UPDATE usuarios
+    SET saldo = saldo - ?
+    WHERE id = ?
+";
 
-$sql = "INSERT INTO pagamentos (id_usuario, servico, referencia, valor) VALUES (?, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
-$stmt->execute([$id_usuario, $servico, $referencia, $valor]);
 
-$sql = "INSERT INTO transacoes (id_origem, id_destino, valor, descricao) VALUES (?, NULL, ?, ?)";
+$stmt->execute([
+    $valor,
+    $id_usuario
+]);
+
+$sql = "
+    INSERT INTO pagamentos
+    (id_usuario, servico, referencia, valor)
+    VALUES (?, ?, ?, ?)
+";
+
 $stmt = $conn->prepare($sql);
-$stmt->execute([$id_usuario, $valor, "Pagamento: " . $servico]);
+
+$stmt->execute([
+    $id_usuario,
+    $servico,
+    $referencia,
+    $valor
+]);
+
+$sql = "
+    INSERT INTO transacoes
+    (id_origem, id_destino, valor, descricao)
+    VALUES (?, NULL, ?, ?)
+";
+
+$stmt = $conn->prepare($sql);
+
+$stmt->execute([
+    $id_usuario,
+    $valor,
+    "Pagamento: " . $servico
+]);
 
 $conn->commit();
 
-header("Location: ../public/dashboard.php");
+header("Location: ../public/dashboard.php?sucesso=pagamento");
 exit;

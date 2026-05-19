@@ -164,6 +164,16 @@ $id_usuario = $_SESSION["id_usuario"];
             margin-bottom: 8px;
         }
 
+        .erro {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+            padding: 14px;
+            border-radius: 14px;
+            margin-bottom: 22px;
+            font-size: 14px;
+        }
+
         @media(max-width: 768px) {
 
             .card {
@@ -201,6 +211,41 @@ $id_usuario = $_SESSION["id_usuario"];
             </p>
 
         </div>
+
+        <?php if (isset($_GET["erro"])): ?>
+
+            <div class="erro">
+
+                <?php
+
+                    switch ($_GET["erro"]) {
+
+                        case "saldo":
+                            echo "Saldo insuficiente.";
+                            break;
+
+                        case "valor":
+                            echo "Valor inválido.";
+                            break;
+
+                        case "campos":
+                            echo "Preencha todos os campos.";
+                            break;
+
+                        case "usuario":
+                            echo "Utilizador não encontrado.";
+                            break;
+
+                        default:
+                            echo "Erro ao processar pagamento.";
+
+                    }
+
+                ?>
+
+            </div>
+
+        <?php endif; ?>
 
         <div class="servicos-grid">
 
