@@ -54,7 +54,7 @@ $modo = $_GET["modo"] ?? "user";
                         color:#fff;
                         padding:10px;
                         border-radius:8px;
-                        margin-bottom:15px;
+                        margin:15px 0px;
                         font-size:14px;
                     ">
 
