@@ -61,7 +61,21 @@ foreach ($transacoes as $t) {
 
     $tipo = "";
 
-    if ($t["id_origem"] == $id_usuario) {
+    if ($t["id_destino"] === null) {
+
+        $tipo = "saida";
+
+        $titulo = "Pagamento";
+
+        $usuario_relacionado = str_replace(
+            "Pagamento: ",
+            "",
+            $t["descricao"]
+        );
+
+    }
+
+    elseif ($t["id_origem"] == $id_usuario) {
 
         $tipo = "saida";
 
@@ -69,13 +83,16 @@ foreach ($transacoes as $t) {
 
         $usuario_relacionado = $t["nome_destino"];
 
-    } else {
+    }
+
+    else {
 
         $tipo = "entrada";
 
         $titulo = "Transferência recebida";
 
         $usuario_relacionado = $t["nome_origem"];
+
     }
 
     $resultado[] = [

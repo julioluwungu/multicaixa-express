@@ -178,14 +178,6 @@ $stmt->execute([
     "Pagamento: " . $empresaNome
 ]);
 
-$stmt = $conn->prepare($sql);
-
-$stmt->execute([
-    $id_usuario,
-    $valor,
-    "Pagamento: " . ucfirst($servico)
-]);
-
 $conn->commit();
 
 header("Location: ../public/dashboard.php?sucesso=pagamento");
