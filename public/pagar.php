@@ -236,6 +236,14 @@ $id_usuario = $_SESSION["id_usuario"];
                             echo "Utilizador não encontrado.";
                             break;
 
+                        case "referencia":
+                            echo "Número de referência inválido para este serviço.";
+                            break;
+
+                        case "servico":
+                            echo "Serviço inválido.";
+                            break;
+
                         default:
                             echo "Erro ao processar pagamento.";
 
@@ -281,21 +289,69 @@ $id_usuario = $_SESSION["id_usuario"];
 
                     <option value="">Selecione</option>
 
-                    <option value="energia">
-                        Energia
-                    </option>
+                    <optgroup label="Energia">
 
-                    <option value="internet">
-                        Internet
-                    </option>
+                        <option value="energia|10001">
+                            ENDE — 10001
+                        </option>
 
-                    <option value="agua">
-                        Água
-                    </option>
+                        <option value="energia|10002">
+                            Prodel — 10002
+                        </option>
 
-                    <option value="tv">
-                        TV
-                    </option>
+                        <option value="energia|10003">
+                            RNT — 10003
+                        </option>
+
+                    </optgroup>
+
+                    <optgroup label="Internet">
+
+                        <option value="internet|20001">
+                            Unitel — 20001
+                        </option>
+
+                        <option value="internet|20002">
+                            Africell — 20002
+                        </option>
+
+                        <option value="internet|20003">
+                            Movicel — 20003
+                        </option>
+
+                    </optgroup>
+
+                    <optgroup label="Água">
+
+                        <option value="agua|30001">
+                            EPAL — 30001
+                        </option>
+
+                        <option value="agua|30002">
+                            Aqua — 30002
+                        </option>
+
+                        <option value="agua|30003">
+                            Pureza — 30003
+                        </option>
+
+                    </optgroup>
+
+                    <optgroup label="TV">
+
+                        <option value="tv|40001">
+                            Zap — 40001
+                        </option>
+
+                        <option value="tv|40002">
+                            DStv — 40002
+                        </option>
+
+                        <option value="tv|40003">
+                            TV Cabo — 40003
+                        </option>
+
+                    </optgroup>
 
                 </select>
 
