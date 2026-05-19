@@ -12,10 +12,10 @@ $localConfig = [
 ];
 
 $prodConfig = [
-    "host" => "",
-    "dbname" => "",
-    "user" => "",
-    "pass" => ""
+    "host" => "sql208.infinityfree.com",
+    "dbname" => "if0_41917814_multicaixa_express",
+    "user" => "if0_41917814",
+    "pass" => "Ha2rd0wa0re7"
 ];
 
 $config = $isLocal ? $localConfig : $prodConfig;
