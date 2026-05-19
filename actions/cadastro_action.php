@@ -29,7 +29,6 @@ if ($stmt->fetch()) {
     exit;
 }
 
-/* segurança extra nível banco */
 $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
 
 $sql = "INSERT INTO usuarios (nome, email, telefone, senha, saldo)

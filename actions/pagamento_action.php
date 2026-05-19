@@ -5,72 +5,45 @@ session_start();
 require_once "../config/database.php";
 
 if (!isset($_SESSION["id_usuario"])) {
-
     header("Location: ../public/login.php");
     exit;
-
 }
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-
     header("Location: ../public/pagar.php");
     exit;
-
 }
 
 $id_usuario = $_SESSION["id_usuario"];
-
-/* serviço selecionado */
-
 $servicoCompleto = trim($_POST["servico"]);
-
 $referencia = trim($_POST["referencia"]);
-
 $valor = floatval($_POST["valor"]);
-
-/* validar serviço */
-
 $partes = explode("|", $servicoCompleto);
 
 if (count($partes) != 2) {
-
     header("Location: ../public/pagar.php?erro=servico");
     exit;
-
 }
 
 $servico = $partes[0];
-
 $referenciaValida = $partes[1];
 
-/* validações */
-
 if ($valor <= 0) {
-
     header("Location: ../public/pagar.php?erro=valor");
     exit;
-
 }
 
 if (empty($servico) || empty($referencia)) {
-
     header("Location: ../public/pagar.php?erro=campos");
     exit;
-
 }
 
-/* validar referência */
-
 if ($referencia !== $referenciaValida) {
-
     header("Location: ../public/pagar.php?erro=referencia");
     exit;
-
 }
 
 $conn->beginTransaction();
-
-/* buscar utilizador */
 
 $sql = "
     SELECT saldo
@@ -79,28 +52,18 @@ $sql = "
 ";
 
 $stmt = $conn->prepare($sql);
-
 $stmt->execute([$id_usuario]);
-
 $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$usuario) {
-
     header("Location: ../public/pagar.php?erro=usuario");
     exit;
-
 }
-
-/* validar saldo */
 
 if ($usuario["saldo"] < $valor) {
-
     header("Location: ../public/pagar.php?erro=saldo");
     exit;
-
 }
-
-/* descontar saldo */
 
 $sql = "
     UPDATE usuarios
@@ -109,13 +72,7 @@ $sql = "
 ";
 
 $stmt = $conn->prepare($sql);
-
-$stmt->execute([
-    $valor,
-    $id_usuario
-]);
-
-/* guardar pagamento */
+$stmt->execute([$valor, $id_usuario]);
 
 $sql = "
     INSERT INTO pagamentos
@@ -124,16 +81,9 @@ $sql = "
 ";
 
 $stmt = $conn->prepare($sql);
-
-$stmt->execute([
-    $id_usuario,
-    $servico,
-    $referencia,
-    $valor
-]);
+$stmt->execute([$id_usuario, $servico, $referencia, $valor]);
 
 $empresas = [
-
     "energia" => [
         "111111" => "ENDE",
         "222222" => "PRODEL",
@@ -157,27 +107,16 @@ $empresas = [
         "202020" => "DSTV",
         "303030" => "TV Cabo"
     ]
-
 ];
 
-/* guardar transação */
-
 $servicosFormatados = [
-
     "energia" => "Energia",
     "internet" => "Internet",
     "agua" => "Água",
     "tv" => "TV"
-
 ];
 
-$empresaNome =
-
-    $servicosFormatados[$servico]
-
-    . " - "
-
-    . $referencia;
+$empresaNome = $servicosFormatados[$servico] . " - " . $referencia;
 
 $sql = "
     INSERT INTO transacoes
@@ -186,15 +125,8 @@ $sql = "
 ";
 
 $stmt = $conn->prepare($sql);
-
-$stmt->execute([
-    $id_usuario,
-    $valor,
-    "Pagamento: " . $empresaNome
-]);
-
+$stmt->execute([$id_usuario, $valor, "Pagamento: " . $empresaNome]);
 $conn->commit();
 
 header("Location: ../public/dashboard.php?sucesso=pagamento");
-
 exit;
