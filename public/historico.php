@@ -239,10 +239,7 @@ function tipoTransacao($t, $id_usuario) {
 
                                     &&
 
-                                    str_contains(
-                                        strtolower($t["descricao"]),
-                                        "levantamento"
-                                    );
+                                    !$isPagamento;
 
                                 if ($isPagamento) {
 
