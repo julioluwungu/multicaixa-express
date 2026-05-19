@@ -13,7 +13,6 @@ class Transacao
     {
         $sql = "INSERT INTO transacoes (id_origem, id_destino, valor, descricao)
                 VALUES (?, ?, ?, ?)";
-
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute([$origem, $destino, $valor, $descricao]);
     }
@@ -28,7 +27,6 @@ class Transacao
 
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$id, $id]);
-
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

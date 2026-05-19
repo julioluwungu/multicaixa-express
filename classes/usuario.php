@@ -14,7 +14,6 @@ class Usuario
         $sql = "SELECT id, nome, email, saldo FROM usuarios WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$id]);
-
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
@@ -23,7 +22,6 @@ class Usuario
         $sql = "SELECT * FROM usuarios WHERE email = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$email]);
-
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }

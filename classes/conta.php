@@ -13,7 +13,6 @@ class Conta
     {
         $sql = "UPDATE usuarios SET saldo = saldo + ? WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
-
         return $stmt->execute([$valor, $id]);
     }
 
@@ -22,7 +21,6 @@ class Conta
         $sql = "SELECT saldo FROM usuarios WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$id]);
-
         return $stmt->fetchColumn();
     }
 }
