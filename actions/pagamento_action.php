@@ -132,13 +132,51 @@ $stmt->execute([
     $valor
 ]);
 
+$empresas = [
+
+    "energia" => [
+        "111111" => "ENDE",
+        "222222" => "PRODEL",
+        "333333" => "RNT"
+    ],
+
+    "internet" => [
+        "444444" => "Unitel",
+        "555555" => "Africell",
+        "666666" => "Movicel"
+    ],
+
+    "agua" => [
+        "777777" => "EPAL",
+        "888888" => "Água Pura",
+        "999999" => "Hidrochicapa"
+    ],
+
+    "tv" => [
+        "101010" => "Zap",
+        "202020" => "DSTV",
+        "303030" => "TV Cabo"
+    ]
+
+];
+
 /* guardar transação */
+
+$empresaNome = $empresas[$servico][$referencia] . " - " . $referencia;
 
 $sql = "
     INSERT INTO transacoes
     (id_origem, id_destino, valor, descricao)
     VALUES (?, NULL, ?, ?)
 ";
+
+$stmt = $conn->prepare($sql);
+
+$stmt->execute([
+    $id_usuario,
+    $valor,
+    "Pagamento: " . $empresaNome
+]);
 
 $stmt = $conn->prepare($sql);
 
