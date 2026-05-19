@@ -3,33 +3,80 @@
 require_once "../config/database.php";
 require_once "../includes/admin_auth.php";
 
-$email = $_POST["email"];
+$email = trim($_POST["email"]);
 $valor = floatval($_POST["valor"]);
 
-$sql = "SELECT id FROM usuarios WHERE email = ?";
+if (empty($email) || $valor <= 0) {
+
+    header("Location: ../public/admin/depositar.php?erro=campos");
+    exit;
+}
+
+/* buscar usuário */
+
+$sql = "
+    SELECT id
+    FROM usuarios
+    WHERE email = ?
+";
+
 $stmt = $conn->prepare($sql);
+
 $stmt->execute([$email]);
 
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
+/* usuário não encontrado */
+
 if (!$user) {
-    die("Usuário não encontrado.");
+
+    header("Location: ../public/admin/depositar.php?erro=nao_encontrado");
+    exit;
 }
 
 $conn->beginTransaction();
 
-/* saldo */
-$stmt = $conn->prepare("UPDATE usuarios SET saldo = saldo + ? WHERE id = ?");
-$stmt->execute([$valor, $user["id"]]);
+/* atualizar saldo */
 
-/* movimento */
 $stmt = $conn->prepare("
-    INSERT INTO movimentos (id_usuario, tipo, valor, descricao)
-    VALUES (?, 'deposito', ?, 'Depósito admin')
+    UPDATE usuarios
+    SET saldo = saldo + ?
+    WHERE id = ?
 ");
-$stmt->execute([$user["id"], $valor]);
+
+$stmt->execute([
+    $valor,
+    $user["id"]
+]);
+
+/* registrar movimento */
+
+$stmt = $conn->prepare("
+
+    INSERT INTO movimentos (
+        id_usuario,
+        tipo,
+        valor,
+        descricao
+    )
+
+    VALUES (
+        ?,
+        'deposito',
+        ?,
+        'Depósito administrativo'
+    )
+
+");
+
+$stmt->execute([
+    $user["id"],
+    $valor
+]);
 
 $conn->commit();
 
-header("Location: ../public/admin/index.php");
+/* sucesso */
+
+header("Location: ../public/admin/depositar.php?sucesso=1");
 exit;

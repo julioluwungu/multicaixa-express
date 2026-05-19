@@ -95,6 +95,30 @@ require_once "../../includes/admin_auth.php";
             text-decoration: none;
         }
 
+        .erro-box {
+
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+            padding: 14px;
+            border-radius: 14px;
+            margin-bottom: 20px;
+            font-size: 14px;
+
+        }
+
+        .sucesso-box {
+
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #22c55e;
+            padding: 14px;
+            border-radius: 14px;
+            margin-bottom: 20px;
+            font-size: 14px;
+
+        }
+
     </style>
 </head>
 
@@ -103,6 +127,40 @@ require_once "../../includes/admin_auth.php";
 <div class="card">
 
     <h1>Depósito</h1>
+
+    <?php if (isset($_GET["erro"])): ?>
+
+        <div class="erro-box">
+
+            <?php
+
+            switch ($_GET["erro"]) {
+
+                case "nao_encontrado":
+                    echo "Usuário não encontrado.";
+                    break;
+
+                case "campos":
+                    echo "Preencha os campos corretamente.";
+                    break;
+
+                default:
+                    echo "Erro ao realizar depósito.";
+            }
+
+            ?>
+
+        </div>
+
+    <?php endif; ?>
+
+    <?php if (isset($_GET["sucesso"])): ?>
+
+        <div class="sucesso-box">
+            Depósito realizado com sucesso.
+        </div>
+
+    <?php endif; ?>
 
     <p>Adicionar saldo a um usuário</p>
 
