@@ -10,11 +10,9 @@ if (!isset($_SESSION["id_usuario"])) {
 }
 
 $id = $_SESSION["id_usuario"];
-
 $sql = "SELECT nome, email, saldo FROM usuarios WHERE id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->execute([$id]);
-
 $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
 ?>
@@ -24,11 +22,8 @@ $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Dashboard | Multicaixa Express</title>
-
     <link rel="stylesheet" href="css/style.css">
-
     <style>
         body {
             background: #0F172A;
@@ -129,62 +124,48 @@ $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
             }
         }
     </style>
-
 </head>
-
 <body>
-
 <div class="container">
-
     <div class="top">
         <div>
             <h2 style="color:#FEA734;">Olá, <?= htmlspecialchars($usuario["nome"]) ?></h2>
             <div class="user"><?= htmlspecialchars($usuario["email"]) ?></div>
         </div>
-
         <a href="../actions/logout.php" class="logout-btn">Sair</a>
     </div>
-
     <div class="card-saldo">
         <div class="saldo-title">Saldo disponível</div>
-        <div class="saldo-value">
-            <?= number_format($usuario["saldo"], 2, ",", ".") ?> Kz
-        </div>
+        <div class="saldo-value"><?= number_format($usuario["saldo"], 2, ",", ".") ?> Kz</div>
     </div>
-
     <div class="grid-actions">
-
         <a class="action" href="transferir.php">Transferir</a>
         <a class="action" href="levantar.php">Levantar</a>
         <a class="action" href="pagar.php">Pagar</a>
         <a class="action" href="historico.php">Histórico</a>
-
     </div>
-
     <div class="section-title">Últimas movimentações</div>
 
     <?php
 
-    $sql = "SELECT * FROM transacoes 
-            WHERE id_origem = ? OR id_destino = ?
-            ORDER BY criado_em DESC LIMIT 5";
+        $sql = "SELECT * FROM transacoes 
+                WHERE id_origem = ? OR id_destino = ?
+                ORDER BY criado_em DESC LIMIT 5";
 
-    $stmt = $conn->prepare($sql);
-    $stmt->execute([$id, $id]);
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$id, $id]);
+        $transacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    $transacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($transacoes as $t):
+        ?>
 
-    foreach ($transacoes as $t):
-    ?>
-
-        <div class="transacao">
-            <div><strong><?= number_format($t["valor"], 2, ",", ".") ?> Kz</strong></div>
-            <small><?= htmlspecialchars($t["descricao"]) ?></small>
-        </div>
+            <div class="transacao">
+                <div><strong><?= number_format($t["valor"], 2, ",", ".") ?> Kz</strong></div>
+                <small><?= htmlspecialchars($t["descricao"]) ?></small>
+            </div>
 
     <?php endforeach; ?>
 
 </div>
-
 </body>
 </html>

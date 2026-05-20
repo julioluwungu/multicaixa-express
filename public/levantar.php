@@ -18,11 +18,8 @@ $id_usuario = $_SESSION["id_usuario"];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Levantar | Multicaixa Express</title>
-
     <style>
-
         * {
             margin: 0;
             padding: 0;
@@ -144,21 +141,17 @@ $id_usuario = $_SESSION["id_usuario"];
         }
 
         @keyframes aparecer {
-
             from {
                 opacity: 0;
                 transform: translateY(-5px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
-
         }
 
         @media(max-width: 768px) {
-
             .card {
                 padding: 25px;
             }
@@ -166,22 +159,14 @@ $id_usuario = $_SESSION["id_usuario"];
             .topo h1 {
                 font-size: 24px;
             }
-
         }
 
     </style>
-
 </head>
 <body>
-
     <div class="card">
-
-        <div class="icone">
-            💵
-        </div>
-
+        <div class="icone">💵</div>
         <div class="topo">
-
             <h1>Levantar Dinheiro</h1>
 
             <?php if (isset($_GET["erro"])): ?>
@@ -191,22 +176,17 @@ $id_usuario = $_SESSION["id_usuario"];
                     <?php
 
                         switch ($_GET["erro"]) {
-
                             case "saldo":
                                 echo "Saldo insuficiente.";
                                 break;
-
                             case "valor":
                                 echo "Valor inválido.";
                                 break;
-
                             case "conta":
                                 echo "Conta não encontrada.";
                                 break;
-
                             default:
                                 echo "Erro ao realizar levantamento.";
-
                         }
 
                     ?>
@@ -215,51 +195,23 @@ $id_usuario = $_SESSION["id_usuario"];
 
             <?php endif; ?>
 
-            <p>
-                Faça levantamentos diretamente da sua conta
-            </p>
+            <p>Faça levantamentos diretamente da sua conta</p>
 
         </div>
-
         <form action="../actions/levantar_action.php" method="POST">
-
             <div class="input-group">
-
                 <label>Valor a levantar</label>
-
-                <input
-                    type="number"
-                    name="valor"
-                    step="0.01"
-                    placeholder="0.00 Kz"
-                    required
-                >
-
+                <input type="number" name="valor" step="0.01" placeholder="0.00 Kz" required>
             </div>
-
             <div class="input-group">
-
                 <label>Descrição (opcional)</label>
-
-                <input
-                    type="text"
-                    name="descricao"
-                    placeholder="Ex: levantamento ATM"
-                >
-
+                <input type="text" name="descricao" placeholder="Ex: levantamento ATM">
             </div>
-
-            <button type="submit">
-                Levantar Dinheiro
-            </button>
-
+            <button type="submit">Levantar Dinheiro</button>
         </form>
 
-        <a href="dashboard.php" class="voltar">
-            ← Voltar ao Dashboard
-        </a>
+        <a href="dashboard.php" class="voltar">← Voltar ao Dashboard</a>
 
     </div>
-
 </body>
 </html>

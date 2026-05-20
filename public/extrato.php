@@ -15,9 +15,7 @@ if (!isset($_SESSION["id_usuario"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Extrato | Multicaixa Express</title>
-
     <style>
-
         * {
             margin: 0;
             padding: 0;
@@ -187,205 +185,95 @@ if (!isset($_SESSION["id_usuario"])) {
             .topo h1 {
                 font-size: 26px;
             }
-
         }
-
     </style>
-
 </head>
 <body>
-
 <div class="container">
-
     <div class="topo">
-
         <h1>Extrato</h1>
-
-        <p>
-            Consulte o histórico das suas movimentações financeiras
-        </p>
-
+        <p>Consulte o histórico das suas movimentações financeiras</p>
     </div>
-
     <div class="acoes">
-
-        <button class="filtro-btn active" data-filtro="todos">
-            Todos
-        </button>
-
-        <button class="filtro-btn" data-filtro="entrada">
-            Entradas
-        </button>
-
-        <button class="filtro-btn" data-filtro="saida">
-            Saídas
-        </button>
-
+        <button class="filtro-btn active" data-filtro="todos">Todos</button>
+        <button class="filtro-btn" data-filtro="entrada">Entradas</button>
+        <button class="filtro-btn" data-filtro="saida">Saídas</button>
     </div>
-
     <div class="lista" id="listaTransacoes">
-
-        <div class="loading">
-            Carregando extrato...
-        </div>
-
+        <div class="loading">Carregando extrato...</div>
     </div>
-
-    <a href="dashboard.php" class="voltar">
-        ← Voltar ao Dashboard
-    </a>
-
+    <a href="dashboard.php" class="voltar">← Voltar ao Dashboard</a>
 </div>
 
 <script>
 
 let transacoes = [];
-
 async function carregarExtrato() {
 
     try {
-
         const resposta = await fetch("../api/extrato.php");
-
         const dados = await resposta.json();
 
         if (!dados.success) {
-
-            document.getElementById("listaTransacoes").innerHTML = `
-                <div class="vazio">
-                    Erro ao carregar extrato
-                </div>
-            `;
-
+            document.getElementById("listaTransacoes").innerHTML = `<div class="vazio">Erro ao carregar extrato</div>`;
             return;
         }
 
         transacoes = dados.transacoes;
-
         renderizarTransacoes("todos");
 
     } catch (erro) {
-
-        document.getElementById("listaTransacoes").innerHTML = `
-            <div class="vazio">
-                Erro de conexão
-            </div>
-        `;
-
+        document.getElementById("listaTransacoes").innerHTML = `<div class="vazio">Erro de conexão</div>`;
     }
-
 }
 
 function renderizarTransacoes(filtro) {
-
     const lista = document.getElementById("listaTransacoes");
-
     let filtradas = transacoes;
 
     if (filtro !== "todos") {
-
-        filtradas = transacoes.filter(
-            t => t.tipo === filtro
-        );
-
+        filtradas = transacoes.filter(t => t.tipo === filtro);
     }
 
     if (filtradas.length === 0) {
-
-        lista.innerHTML = `
-            <div class="vazio">
-                Nenhuma transação encontrada
-            </div>
-        `;
-
+        lista.innerHTML = `<div class="vazio">Nenhuma transação encontrada</div>`;
         return;
     }
 
     lista.innerHTML = "";
 
     filtradas.forEach(transacao => {
-
-        const icone =
-            transacao.tipo === "entrada"
-            ? "⬇"
-            : "⬆";
-
-        const classe =
-            transacao.tipo === "entrada"
-            ? "entrada"
-            : "saida";
-
-        const classeTexto =
-            transacao.tipo === "entrada"
-            ? "entrada-texto"
-            : "saida-texto";
+        const icone = transacao.tipo === "entrada" ? "⬇" : "⬆";
+        const classe = transacao.tipo === "entrada" ? "entrada" : "saida";
+        const classeTexto = transacao.tipo === "entrada" ? "entrada-texto" : "saida-texto";
 
         lista.innerHTML += `
-
             <div class="transacao">
-
                 <div class="left">
-
-                    <div class="icone ${classe}">
-                        ${icone}
-                    </div>
-
+                    <div class="icone ${classe}">${icone}</div>
                     <div class="info">
-
-                        <h3>
-                            ${transacao.titulo}
-                        </h3>
-
-                        <p>
-                            ${transacao.usuario}
-                        </p>
-
-                        <p>
-                            ${transacao.descricao || ""}
-                        </p>
-
+                        <h3>${transacao.titulo}</h3>
+                        <p>${transacao.usuario}</p>
+                        <p>${transacao.descricao || ""}</p>
                     </div>
-
                 </div>
-
                 <div class="valor">
-
                     <strong class="${classeTexto}">
                         ${transacao.tipo === "entrada" ? "+" : "-"}
                         ${transacao.valor}
                     </strong>
-
-                    <span>
-                        ${transacao.data}
-                    </span>
-
+                    <span>${transacao.data}</span>
                 </div>
-
             </div>
-
         `;
-
     });
-
 }
 
-document.querySelectorAll(".filtro-btn")
-.forEach(botao => {
-
-    botao.addEventListener("click", () => {
-
-        document
-        .querySelectorAll(".filtro-btn")
-        .forEach(b => b.classList.remove("active"));
-
+document.querySelectorAll(".filtro-btn").forEach(botao => {
+    botao.addEventListener("click", () => {document.querySelectorAll(".filtro-btn").forEach(b => b.classList.remove("active"));
         botao.classList.add("active");
-
-        renderizarTransacoes(
-            botao.dataset.filtro
-        );
-
+        renderizarTransacoes(botao.dataset.filtro);
     });
-
 });
 
 carregarExtrato();

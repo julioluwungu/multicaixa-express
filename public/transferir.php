@@ -18,11 +18,8 @@ $id_usuario = $_SESSION["id_usuario"];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Transferir | Multicaixa Express</title>
-
     <style>
-
         * {
             margin: 0;
             padding: 0;
@@ -156,12 +153,10 @@ $id_usuario = $_SESSION["id_usuario"];
         }
 
         @keyframes aparecer {
-
             from {
                 opacity: 0;
                 transform: translateY(-5px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -170,7 +165,6 @@ $id_usuario = $_SESSION["id_usuario"];
         }
 
         @media(max-width: 768px) {
-
             .card {
                 padding: 25px;
             }
@@ -178,29 +172,15 @@ $id_usuario = $_SESSION["id_usuario"];
             .topo h1 {
                 font-size: 24px;
             }
-
         }
-
     </style>
-
 </head>
 <body>
-
     <div class="card">
-
-        <div class="icone">
-            💸
-        </div>
-
+        <div class="icone">💸</div>
         <div class="topo">
-
             <h1>Transferência</h1>
-
-            <p>
-                Envie dinheiro para outros usuários do sistema
-                de forma rápida e segura.
-            </p>
-
+            <p>Envie dinheiro para outros usuários do sistema de forma rápida e segura.</p>
         </div>
 
         <?php if (isset($_GET["erro"])): ?>
@@ -210,34 +190,26 @@ $id_usuario = $_SESSION["id_usuario"];
                 <?php
 
                     switch ($_GET["erro"]) {
-
                         case "saldo":
                             echo "Saldo insuficiente.";
                             break;
-
                         case "valor":
                             echo "Valor inválido.";
                             break;
-
                         case "email":
                             echo "Informe o email do destinatário.";
                             break;
-
                         case "destino":
                             echo "Destinatário não encontrado.";
                             break;
-
                         case "origem":
                             echo "Conta de origem não encontrada.";
                             break;
-
                         case "proprio":
                             echo "Não pode transferir para si mesmo.";
                             break;
-
                         default:
                             echo "Erro ao realizar transferência.";
-
                     }
 
                 ?>
@@ -246,63 +218,27 @@ $id_usuario = $_SESSION["id_usuario"];
 
         <?php endif; ?>
 
-        <div class="info-box">
-            Certifique-se de que o email do destinatário está correto
-            antes de confirmar a transferência.
-        </div>
+        <div class="info-box">Certifique-se de que o email do destinatário está correto
+            antes de confirmar a transferência.</div>
 
         <form action="../actions/transferencia_action.php" method="POST">
-
             <div class="input-group">
-
                 <label>Email do destinatário</label>
-
-                <input
-                    type="email"
-                    name="email_destino"
-                    placeholder="exemplo@email.com"
-                    required
-                >
-
+                <input type="email" name="email_destino" placeholder="exemplo@email.com" required>
             </div>
-
             <div class="input-group">
-
                 <label>Valor</label>
-
-                <input
-                    type="number"
-                    name="valor"
-                    step="0.01"
-                    placeholder="0.00 Kz"
-                    required
-                >
-
+                <input type="number" name="valor" step="0.01" placeholder="0.00 Kz" required>
             </div>
-
             <div class="input-group">
-
                 <label>Descrição (opcional)</label>
-
-                <input
-                    type="text"
-                    name="descricao"
-                    placeholder="Ex: pagamento"
-                >
-
+                <input type="text" name="descricao" placeholder="Ex: pagamento">
             </div>
-
-            <button type="submit">
-                Transferir Dinheiro
-            </button>
-
+            <button type="submit">Transferir Dinheiro</button>
         </form>
 
-        <a href="dashboard.php" class="voltar">
-            ← Voltar ao Dashboard
-        </a>
+        <a href="dashboard.php" class="voltar">← Voltar ao Dashboard</a>
 
     </div>
-
 </body>
 </html>

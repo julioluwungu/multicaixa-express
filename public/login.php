@@ -16,71 +16,43 @@ $modo = $_GET["modo"] ?? "user";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Login | Multicaixa Express</title>
-
     <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
-
     <div class="container">
-
         <div class="login-card">
-
             <h1>Multicaixa Express</h1>
-
             <form action="../actions/login_action.php" method="POST">
-
-                <input
-                    type="hidden"
-                    name="modo"
-                    value="<?= $modo ?>"
-                >
+                <input type="hidden" name="modo" value="<?= $modo ?>">
 
                 <?php if ($modo === "admin"): ?>
-                    <h3 style="color:#FEA734; text-align:center;">
-                        Login Administrativo
-                    </h3>
+                    <h3 style="color:#FEA734; text-align:center;">Login Administrativo</h3>
                 <?php else: ?>
-                    <h3 style="color:#FEA734; text-align:center;">
-                        Login
-                    </h3>
+                    <h3 style="color:#FEA734; text-align:center;">Login</h3>
                 <?php endif; ?>
                 
                 <?php if (isset($_GET["erro"])): ?>
 
-                    <div style="
-                        background:#7f1d1d;
-                        color:#fff;
-                        padding:10px;
-                        border-radius:8px;
-                        margin:15px 0px;
-                        font-size:14px;
-                    ">
+                    <div style="background:#7f1d1d; color:#fff; padding:10px;border-radius:8px; margin:15px 0px; font-size:14px;">
 
                         <?php
                         switch ($_GET["erro"]) {
-
                             case "preencher":
                                 echo "Preencha todos os campos.";
                                 break;
-
                             case "nao_encontrado":
                                 echo "Utilizador não encontrado.";
                                 break;
-
                             case "senha_incorreta":
                                 echo "Senha incorreta.";
                                 break;
-
                             case "sem_permissao":
                                 echo "Esta conta não possui acesso administrativo.";
                                 break;
-
                             case "admin_nao":
                                 echo "Administradores devem usar o login administrativo.";
                                 break;
-
                             default:
                                 echo "Erro ao fazer login.";
                         }
@@ -92,60 +64,32 @@ $modo = $_GET["modo"] ?? "user";
 
                 <div class="input-group">
                     <label for="email">Email</label>
-
-                    <input
-                        type="email"
-                        name="email"
-                        id="email"
-                        placeholder="Digite o seu email"
-                        required
-                    >
+                    <input type="email" name="email" id="email" placeholder="Digite o seu email" required>
                 </div>
-
                 <div class="input-group">
                     <label for="senha">Senha</label>
-
-                    <input
-                        type="password"
-                        name="senha"
-                        id="senha"
-                        placeholder="Digite a sua senha"
-                        required
-                    >
+                    <input type="password" name="senha" id="senha" placeholder="Digite a sua senha" required>
                 </div>
-
-                <button type="submit">
-                    Entrar
-                </button>
+                <button type="submit">Entrar</button>
 
                 <div style="margin-top:15px; text-align:center;">
 
                     <?php if ($modo === "admin"): ?>
 
-                        <a href="login.php?modo=user" style="color:#FEA734;">
-                            Entrar como usuário comum
-                        </a>
+                        <a href="login.php?modo=user" style="color:#FEA734;">Entrar como usuário comum</a>
 
                     <?php else: ?>
 
-                        <a href="login.php?modo=admin" style="color:#FEA734;">
-                            Entrar como administrador
-                        </a>
+                        <a href="login.php?modo=admin" style="color:#FEA734;">Entrar como administrador</a>
 
                     <?php endif; ?>
 
                 </div>
-
                 <div style="margin-top:15px; text-align:center;">
-                    <a href="cadastro.php" style="color:#FEA734;">
-                        Ainda não tenho conta
-                    </a>
+                    <a href="cadastro.php" style="color:#FEA734;">Ainda não tenho conta</a>
                 </div>
-
             </form>
-
         </div>
-
     </div>
 
     <script src="js/login.js"></script>

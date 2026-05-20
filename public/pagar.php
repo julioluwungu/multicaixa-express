@@ -18,11 +18,8 @@ $id_usuario = $_SESSION["id_usuario"];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Pagar Serviços | Multicaixa Express</title>
-
     <style>
-
         * {
             margin: 0;
             padding: 0;
@@ -175,7 +172,6 @@ $id_usuario = $_SESSION["id_usuario"];
         }
 
         @media(max-width: 768px) {
-
             .card {
                 padding: 25px;
             }
@@ -187,29 +183,15 @@ $id_usuario = $_SESSION["id_usuario"];
             .servicos-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-
         }
-
     </style>
-
 </head>
 <body>
-
     <div class="card">
-
-        <div class="icone">
-            🧾
-        </div>
-
+        <div class="icone">🧾</div>
         <div class="topo">
-
             <h1>Pagar Serviços</h1>
-
-            <p>
-                Faça pagamentos de serviços diretamente
-                pela sua conta Multicaixa Express.
-            </p>
-
+            <p>Faça pagamentos de serviços diretamente pela sua conta Multicaixa Express.</p>
         </div>
 
         <?php if (isset($_GET["erro"])): ?>
@@ -219,34 +201,26 @@ $id_usuario = $_SESSION["id_usuario"];
                 <?php
 
                     switch ($_GET["erro"]) {
-
                         case "saldo":
                             echo "Saldo insuficiente.";
                             break;
-
                         case "valor":
                             echo "Valor inválido.";
                             break;
-
                         case "campos":
                             echo "Preencha todos os campos.";
                             break;
-
                         case "usuario":
                             echo "Utilizador não encontrado.";
                             break;
-
                         case "referencia":
                             echo "Número de referência inválido para este serviço.";
                             break;
-
                         case "servico":
                             echo "Serviço inválido.";
                             break;
-
                         default:
                             echo "Erro ao processar pagamento.";
-
                     }
 
                 ?>
@@ -256,145 +230,51 @@ $id_usuario = $_SESSION["id_usuario"];
         <?php endif; ?>
 
         <div class="servicos-grid">
-
-            <div class="servico-box">
-                <span>⚡</span>
-                Energia
-            </div>
-
-            <div class="servico-box">
-                <span>🌐</span>
-                Internet
-            </div>
-
-            <div class="servico-box">
-                <span>🚰</span>
-                Água
-            </div>
-
-            <div class="servico-box">
-                <span>📺</span>
-                TV
-            </div>
-
+            <div class="servico-box"><span>⚡</span>Energia</div>
+            <div class="servico-box"><span>🌐</span>Internet</div>
+            <div class="servico-box"><span>🚰</span>Água</div>
+            <div class="servico-box"><span>📺</span>TV</div>
         </div>
-
         <form action="../actions/pagamento_action.php" method="POST">
-
             <div class="input-group">
-
                 <label>Tipo de serviço</label>
-
                 <select name="servico" required>
-
                     <option value="">Selecione</option>
-
                     <optgroup label="Energia">
-
-                        <option value="energia|10001">
-                            ENDE — 10001
-                        </option>
-
-                        <option value="energia|10002">
-                            Prodel — 10002
-                        </option>
-
-                        <option value="energia|10003">
-                            RNT — 10003
-                        </option>
-
+                        <option value="energia|10001">ENDE — 10001</option>
+                        <option value="energia|10002">Prodel — 10002</option>
+                        <option value="energia|10003">RNT — 10003</option>
                     </optgroup>
-
                     <optgroup label="Internet">
-
-                        <option value="internet|20001">
-                            Unitel — 20001
-                        </option>
-
-                        <option value="internet|20002">
-                            Africell — 20002
-                        </option>
-
-                        <option value="internet|20003">
-                            Movicel — 20003
-                        </option>
-
+                        <option value="internet|20001">Unitel — 20001</option>
+                        <option value="internet|20002">Africell — 20002</option>
+                        <option value="internet|20003">Movicel — 20003</option>
                     </optgroup>
-
                     <optgroup label="Água">
-
-                        <option value="agua|30001">
-                            EPAL — 30001
-                        </option>
-
-                        <option value="agua|30002">
-                            Aqua — 30002
-                        </option>
-
-                        <option value="agua|30003">
-                            Pureza — 30003
-                        </option>
-
+                        <option value="agua|30001">EPAL — 30001</option>
+                        <option value="agua|30002">Aqua — 30002</option>
+                        <option value="agua|30003">Pureza — 30003</option>
                     </optgroup>
-
                     <optgroup label="TV">
-
-                        <option value="tv|40001">
-                            Zap — 40001
-                        </option>
-
-                        <option value="tv|40002">
-                            DStv — 40002
-                        </option>
-
-                        <option value="tv|40003">
-                            TV Cabo — 40003
-                        </option>
-
+                        <option value="tv|40001">Zap — 40001</option>
+                        <option value="tv|40002">DStv — 40002</option>
+                        <option value="tv|40003">TV Cabo — 40003</option>
                     </optgroup>
-
                 </select>
-
             </div>
-
             <div class="input-group">
-
                 <label>Número da referência</label>
-
-                <input
-                    type="text"
-                    name="referencia"
-                    placeholder="Ex: 123456789"
-                    required
-                >
-
+                <input type="text" name="referencia" placeholder="Ex: 123456789" required>
             </div>
-
             <div class="input-group">
-
                 <label>Valor</label>
-
-                <input
-                    type="number"
-                    name="valor"
-                    step="0.01"
-                    placeholder="0.00 Kz"
-                    required
-                >
-
+                <input type="number" name="valor" step="0.01" placeholder="0.00 Kz" required>
             </div>
-
-            <button type="submit">
-                Efetuar Pagamento
-            </button>
-
+            <button type="submit">Efetuar Pagamento</button>
         </form>
 
-        <a href="dashboard.php" class="voltar">
-            ← Voltar ao Dashboard
-        </a>
+        <a href="dashboard.php" class="voltar">← Voltar ao Dashboard</a>
 
     </div>
-
 </body>
 </html>
