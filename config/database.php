@@ -1,8 +1,6 @@
 <?php
 
-require_once __DIR__ . '/setup.php';
-
-$isLocal = $_SERVER['SERVER_NAME'] === 'localhost';
+$isLocal = $_SERVER['HTTP_HOST'] === 'localhost' || str_contains($_SERVER['HTTP_HOST'], '127.0.0.1');
 
 $localConfig = [
     "host" => "localhost",
