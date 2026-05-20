@@ -140,6 +140,14 @@ $movimentos = $conn->query("
             font-weight: bold;
         }
 
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #94A3B8;
+            font-size: 12px;
+            margin-top: 30px;
+        }
+
         @media(max-width: 768px) {
             body {
                 padding: 15px;
@@ -204,5 +212,6 @@ $movimentos = $conn->query("
     <?php endif; ?>
 
 </div>
+<footer class="footer">© <?= date("Y") ?> Multicaixa Express</footer>
 </body>
 </html>
