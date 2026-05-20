@@ -118,6 +118,14 @@ $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
             color: #94A3B8;
         }
 
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #94A3B8;
+            font-size: 12px;
+            margin-top: 30px;
+        }
+
         @media (max-width: 600px) {
             .grid-actions {
                 grid-template-columns: repeat(2, 1fr);
@@ -167,5 +175,6 @@ $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
     <?php endforeach; ?>
 
 </div>
+<footer class="footer">© <?= date("Y") ?> Multicaixa Express</footer>
 </body>
 </html>
