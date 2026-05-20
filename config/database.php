@@ -1,6 +1,6 @@
 <?php
 
-$isLocal = $_SERVER['HTTP_HOST'] === 'localhost' || str_contains($_SERVER['HTTP_HOST'], '127.0.0.1');
+$isLocal = in_array($_SERVER['SERVER_NAME'], ['localhost', '127.0.0.1']) || ($_SERVER['SERVER_ADDR'] ?? '') === '127.0.0.1';
 
 $localConfig = [
     "host" => "localhost",
