@@ -49,43 +49,43 @@ TV:
 
 Cada empresa possui referências válidas específicas, garantindo uma experiência semelhante a aplicativos bancários reais.
 
-* Painel Administrativo
+Painel Administrativo
 
 O sistema possui uma área administrativa exclusiva para administradores.
 
 O administrador pode:
 
-Visualizar todos os usuários
-Consultar saldos
-Depositar dinheiro em contas
-Eliminar contas de usuários
-Visualizar movimentos financeiros
-Monitorar estatísticas do sistema
-Super Admin Automático
+- Visualizar todos os usuários
+- Consultar saldos
+- Depositar dinheiro em contas
+- Eliminar contas de usuários
+- Visualizar movimentos financeiros
+- Monitorar estatísticas do sistema
+- Super Admin Automático
 
 Ao executar o projeto pela primeira vez, o sistema cria automaticamente uma conta de super administrador.
 
-Credenciais padrão
-Email: admin@gmail.com
-Senha: Ha2rd0wa0re7
+Credenciais padrão:
+- Email: admin@gmail.com
+- Senha: Ha2rd0wa0re7
 
 O super admin possui acesso completo ao painel administrativo.
 
-Tecnologias Utilizadas
-PHP
-MySQL
-HTML5
-CSS3
-JavaScript
-PDO (PHP Data Objects)
-Banco de Dados Automático
+Tecnologias Utilizadas:
+- PHP
+- MySQL
+- HTML5
+- CSS3
+- JavaScript
+- PDO (PHP Data Objects)
+- Banco de Dados Automático
 
 O projeto foi desenvolvido para criar automaticamente:
 
-banco de dados;
-tabelas;
-estrutura inicial;
-conta super admin.
+- banco de dados;
+- tabelas;
+- estrutura inicial;
+- conta super admin.
 
 Isso significa que o usuário não precisa criar manualmente o banco de dados para começar a usar o sistema.
 
@@ -105,21 +105,21 @@ Segurança Implementada
 
 O sistema possui:
 
-autenticação com sessões;
-hash de senhas com password_hash();
-proteção de rotas administrativas;
-separação entre login administrativo e login comum;
-validação de saldo;
-validação de referências de pagamento.
-Interface
+- autenticação com sessões;
+- hash de senhas com password_hash();
+- proteção de rotas administrativas;
+- separação entre login administrativo e login comum;
+- validação de saldo;
+- validação de referências de pagamento.
+- Interface
 
 A interface foi inspirada em aplicativos bancários modernos como o Multicaixa Express, utilizando:
 
-tema escuro;
-design responsivo;
-cores principais:
-branco;
-#FEA734 (amarelo alaranjado).
+- tema escuro;
+- design responsivo;
+- cores principais:
+- branco;
+- #FEA734 (amarelo alaranjado).
 
 Como Executar o Projeto:
 1. Clonar o projeto
@@ -133,8 +133,8 @@ htdocs/
 
 Inicie:
 
-Apache
-MySQL
+- Apache
+- MySQL
 
 no painel do XAMPP.
 
@@ -144,18 +144,18 @@ Objetivo do Projeto
 
 Este projeto foi desenvolvido com fins:
 
-educacionais;
-acadêmicos;
-prática de desenvolvimento web;
-simulação de sistemas bancários digitais.
-Melhorias Futuras
+- educacionais;
+- acadêmicos;
+- prática de desenvolvimento web;
+- simulação de sistemas bancários digitais.
+- Melhorias Futuras
 
 Algumas melhorias planejadas incluem:
 
-PIN de transações
-QR Code para pagamentos
-Upload de foto de perfil
-Notificações em tempo real
-Comprovantes PDF
-Modo claro/escuro
-Estatísticas financeiras avançadas
+- PIN de transações
+- QR Code para pagamentos
+- Upload de foto de perfil
+- Notificações em tempo real
+- Comprovantes PDF
+- Modo claro/escuro
+- Estatísticas financeiras avançadas
