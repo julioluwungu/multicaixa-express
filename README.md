@@ -8,48 +8,48 @@ O Multicaixa Express é uma aplicação web desenvolvida em PHP, inspirada em ap
 
 A aplicação foi criada com foco em:
 
-experiência de usuário moderna;
-interface responsiva;
-segurança básica de autenticação;
-organização profissional do código;
-funcionamento automático do banco de dados.
-Funcionalidades Principais
-Usuários Comuns
+- experiência de usuário moderna;
+- interface responsiva;
+- segurança básica de autenticação;
+- organização profissional do código;
+- funcionamento automático do banco de dados.
+- Funcionalidades Principais
+- Usuários Comuns
 
 Os usuários cadastrados podem:
 
-Criar conta
-Fazer login seguro
-Consultar saldo
-Transferir dinheiro entre usuários
-Levantar dinheiro
-Pagar serviços
-Visualizar extrato de transações
-Encerrar sessão
-Sistema de Pagamentos
+- Criar conta
+- Fazer login seguro
+- Consultar saldo
+- Transferir dinheiro entre usuários
+- Levantar dinheiro
+- Pagar serviços
+- Visualizar extrato de transações
+- Encerrar sessão
+- Sistema de Pagamentos
 
 O sistema possui pagamentos simulados para serviços reais, incluindo:
 
-Energia
-ENDE
-PRODEL
-RNT
-Internet
-Unitel
-Africell
-Movicel
-Água
-EPAL
-Água Pura
-Hidrochicapa
-TV
-Zap
-DSTV
-TV Cabo
+Energia:
+- ENDE
+- PRODEL
+- RNT
+Internet:
+- Unitel
+- Africell
+- Movicel
+Água:
+- EPAL
+- Água Pura
+- Hidrochicapa
+TV:
+- Zap
+- DSTV
+- TV Cabo
 
 Cada empresa possui referências válidas específicas, garantindo uma experiência semelhante a aplicativos bancários reais.
 
-Painel Administrativo
+* Painel Administrativo
 
 O sistema possui uma área administrativa exclusiva para administradores.
 
