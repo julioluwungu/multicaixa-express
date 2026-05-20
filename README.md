@@ -34,15 +34,21 @@ Energia:
 - ENDE
 - PRODEL
 - RNT
+
 Internet:
+
 - Unitel
 - Africell
 - Movicel
+
 Água:
+
 - EPAL
 - Água Pura
 - Hidrochicapa
+
 TV:
+
 - Zap
 - DSTV
 - TV Cabo
