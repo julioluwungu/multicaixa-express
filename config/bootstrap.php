@@ -7,7 +7,7 @@ $stmt = $conn->prepare($sql);
 $stmt->execute();
 
 if (!$stmt->fetch()) {
-    $senha = password_hash("Ha2rd0wa0re7", PASSWORD_DEFAULT);
+    $senha = password_hash("Com2pu0ta0dor7", PASSWORD_DEFAULT);
 
     $sql = "INSERT INTO usuarios (nome, email, senha, saldo, tipo)
             VALUES (?, ?, ?, 0, 'super_admin')";
