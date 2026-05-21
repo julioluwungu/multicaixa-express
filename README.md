@@ -71,10 +71,6 @@ O administrador pode:
 
 Ao executar o projeto pela primeira vez, o sistema cria automaticamente uma conta de super administrador.
 
-Credenciais padrão:
-- Email: admin@gmail.com
-- Senha: Ha2rd0wa0re7
-
 O super admin possui acesso completo ao painel administrativo.
 
 Tecnologias Utilizadas:
