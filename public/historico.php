@@ -299,9 +299,7 @@ function tipoTransacao($t, $id_usuario) {
         <?php endif; ?>
 
         <div class="acoes">
-            <a href="dashboard.php" class="btn voltar-btn">
-                Voltar
-            </a>
+            <a href="dashboard.php" class="btn voltar-btn">Voltar</a>
         </div>
     </div>
 </div>

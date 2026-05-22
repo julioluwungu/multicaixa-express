@@ -234,14 +234,10 @@ $id_usuario = $_SESSION["id_usuario"];
     <div class="card">
         <h1 class="titulo">PAGAR SERVIÇOS</h1>
 
-        <p class="subtitulo">
-            Faça pagamentos de serviços diretamente pela sua conta Multicaixa Express.
-        </p>
+        <p class="subtitulo">Faça pagamentos de serviços diretamente pela sua conta Multicaixa Express.</p>
 
         <?php if (isset($_GET["sucesso"])): ?>
-            <div class="sucesso">
-                ✓ Pagamento realizado com sucesso!
-            </div>
+            <div class="sucesso">✓ Pagamento realizado com sucesso!</div>
         <?php endif; ?>
 
         <?php if (isset($_GET["erro"])): ?>
@@ -326,9 +322,7 @@ $id_usuario = $_SESSION["id_usuario"];
         </form>
 
         <div class="acoes">
-            <a href="dashboard.php" class="btn voltar-btn">
-                Voltar
-            </a>
+            <a href="dashboard.php" class="btn voltar-btn">Voltar</a>
         </div>
     </div>
 </div>

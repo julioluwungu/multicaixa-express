@@ -214,14 +214,10 @@ $id_usuario = $_SESSION["id_usuario"];
     <div class="card">
         <h1 class="titulo">TRANSFERIR</h1>
 
-        <p class="subtitulo">
-            Envie dinheiro para outros usuários do sistema de forma rápida e segura.
-        </p>
+        <p class="subtitulo">Envie dinheiro para outros usuários do sistema de forma rápida e segura.</p>
 
         <?php if (isset($_GET["sucesso"])): ?>
-            <div class="sucesso">
-                ✓ Transferência realizada com sucesso!
-            </div>
+            <div class="sucesso">✓ Transferência realizada com sucesso!</div>
         <?php endif; ?>
 
         <?php if (isset($_GET["erro"])): ?>
@@ -277,9 +273,7 @@ $id_usuario = $_SESSION["id_usuario"];
         </form>
 
         <div class="acoes">
-            <a href="dashboard.php" class="btn voltar-btn">
-                Voltar
-            </a>
+            <a href="dashboard.php" class="btn voltar-btn">Voltar</a>
         </div>
     </div>
 </div>

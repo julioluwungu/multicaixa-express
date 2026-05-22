@@ -29,13 +29,9 @@ $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Consultar Saldo | Multicaixa Express</title>
-
     <link rel="stylesheet" href="css/style.css">
-
     <style>
-
         * {
             margin: 0;
             padding: 0;
@@ -148,20 +144,13 @@ $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 <body>
 
 <div class="topbar">
-    <div class="logo">
-        Multicaixa Express
-    </div>
+    <div class="logo">Multicaixa Express</div>
 </div>
 
 <div class="container">
     <div class="saldo-card">
-        <h1 class="titulo">
-            CONSULTAR SALDO
-        </h1>
-
-        <div class="saldo-label">
-            Saldo disponível
-        </div>
+        <h1 class="titulo">CONSULTAR SALDO</h1>
+        <div class="saldo-label">Saldo disponível</div>
 
         <div class="saldo-valor">
             <?= number_format($usuario["saldo"], 2, ",", ".") ?> Kz
@@ -173,9 +162,7 @@ $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
     </div>
 
     <div class="acoes">
-        <a href="dashboard.php" class="btn voltar-btn">
-            Voltar
-        </a>
+        <a href="dashboard.php" class="btn voltar-btn">Voltar</a>
     </div>
 </div>
 

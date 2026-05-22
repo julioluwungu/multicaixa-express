@@ -253,9 +253,7 @@ if (isset($_SESSION['id_usuario'])) {
         </form>
 
         <div class="acoes">
-            <a href="login.php" class="btn btn-full">
-                ← Voltar ao Login
-            </a>
+            <a href="login.php" class="btn btn-full">Voltar ao Login</a>
         </div>
     </div>
 </div>
@@ -263,7 +261,6 @@ if (isset($_SESSION['id_usuario'])) {
 <script src="js/cadastro.js"></script>
 
 <script>
-    // Força da senha
     const senhaInput = document.getElementById('senha');
     const forcaDiv = document.getElementById('forcaSenha');
     
@@ -297,7 +294,6 @@ if (isset($_SESSION['id_usuario'])) {
         forcaDiv.className = 'strength ' + classe;
     });
     
-    // Confirmar senha
     const confirmarInput = document.getElementById('confirmar');
     const matchDiv = document.getElementById('matchSenha');
     

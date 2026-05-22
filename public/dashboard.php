@@ -29,13 +29,9 @@ $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Dashboard | Multicaixa Express</title>
-
     <link rel="stylesheet" href="css/style.css">
-
     <style>
-
         * {
             margin: 0;
             padding: 0;
@@ -234,21 +230,12 @@ $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 </div>
 
 <div class="topbar">
-
-    <div class="menu-btn" onclick="toggleMenu()">
-        ☰
-    </div>
-
-    <div class="logo">
-        Multicaixa Express
-    </div>
-
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+    <div class="logo">Multicaixa Express</div>
 </div>
 
 <div class="container">
-
     <h1 class="titulo">CARTÃO</h1>
-
     <div class="card-area">
         <div class="bank-card">
             <img src="assets/imagens/cartao-multicaixa.png" class="card-image">
@@ -256,41 +243,34 @@ $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
     </div>
 
     <div class="grid">
-
         <a href="transferir.php" class="item">
             <div class="icon-area">
                 <img src="assets/icones/transferir.png">
             </div>
             <span>Transferir</span>
         </a>
-
         <a href="pagar.php" class="item">
             <div class="icon-area">
                 <img src="assets/icones/pagar.png">
             </div>
             <span>Pagar</span>
         </a>
-
         <a href="historico.php" class="item">
             <div class="icon-area">
                 <img src="assets/icones/historico.png">
             </div>
             <span>Histórico</span>
         </a>
-
         <a href="saldo.php" class="item">
             <div class="icon-area">
                 <img src="assets/icones/consultar-saldo.png">
             </div>
             <span>Consultar Saldo</span>
         </a>
-
     </div>
-
     <div class="footer">
         © <?= date("Y") ?> Multicaixa Express
     </div>
-
 </div>
 
 <script>
