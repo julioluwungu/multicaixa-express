@@ -50,6 +50,14 @@ $movimentos = $conn->query("
             color: white;
             font-size: 28px;
             font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo img {
+            width: 40px;
         }
 
         .menu-btn {
@@ -305,12 +313,8 @@ $movimentos = $conn->query("
 </div>
 
 <div class="topbar">
-    <div class="menu-btn" onclick="toggleMenu()">
-        ☰
-    </div>
-    <div class="logo">
-        Multicaixa Express
-    </div>
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+    <div class="logo"><img src="../assets/imagens/logo.png" alt="Logo do Multicaixa Express">Multicaixa Express</div>
 </div>
 
 <div class="container">

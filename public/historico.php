@@ -67,7 +67,14 @@ function tipoTransacao($t, $id_usuario) {
             color: white;
             font-size: 28px;
             font-weight: bold;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo img {
+            width: 40px;
         }
 
         .container {
@@ -240,7 +247,7 @@ function tipoTransacao($t, $id_usuario) {
 <body>
 
 <div class="topbar">
-    <div class="logo">Multicaixa Express</div>
+    <div class="logo"><img src="./assets/imagens/logo.png" alt="Logo do Multicaixa Express">Multicaixa Express</div>
 </div>
 
 <div class="container">

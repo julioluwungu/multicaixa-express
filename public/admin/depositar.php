@@ -23,16 +23,34 @@ require_once "../../includes/admin_auth.php";
             font-family: Arial, sans-serif;
             color: #111827;
             min-height: 100vh;
+        }
+
+        .topbar {
+            background: #F59E0B;
+            padding: 18px 20px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
+        .logo {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo img {
+            width: 40px;
+        }
+
         .container {
             max-width: 500px;
             margin: auto;
-            padding: 20px;
-            width: 100%;
+            padding: 25px 20px;
         }
 
         .card {
@@ -174,6 +192,10 @@ require_once "../../includes/admin_auth.php";
     </style>
 </head>
 <body>
+<div class="topbar">
+    <div class="logo"><img src="../assets/imagens/logo.png" alt="Logo do Multicaixa Express">Multicaixa Express</div>
+</div>
+
 <div class="container">
     <div class="card">
         <h1 class="titulo">DEPÓSITO</h1>

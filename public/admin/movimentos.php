@@ -33,6 +33,28 @@ $movimentos = $conn->query("
             min-height: 100vh;
         }
 
+        .topbar {
+            background: #F59E0B;
+            padding: 18px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo img {
+            width: 40px;
+        }
+
         .container {
             max-width: 900px;
             margin: auto;
@@ -191,6 +213,10 @@ $movimentos = $conn->query("
     </style>
 </head>
 <body>
+<div class="topbar">
+    <div class="logo"><img src="../assets/imagens/logo.png" alt="Logo do Multicaixa Express">Multicaixa Express</div>
+</div>
+
 <div class="container">
     <div class="card">
         <h1 class="titulo">MOVIMENTOS</h1>
