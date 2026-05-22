@@ -99,5 +99,5 @@ $stmt = $conn->prepare($sql);
 $stmt->execute([$id_origem, $destino["id"], $valor, $descricao]);
 $conn->commit();
 
-header("Location: ../public/dashboard.php?sucesso=transferencia");
+header("Location: ../public/transferir.php?sucesso=1");
 exit;

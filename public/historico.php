@@ -40,6 +40,7 @@ function tipoTransacao($t, $id_usuario) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Histórico | Multicaixa Express</title>
+    
     <style>
         * {
             margin: 0;
@@ -48,30 +49,54 @@ function tipoTransacao($t, $id_usuario) {
         }
 
         body {
-            background: linear-gradient(to bottom right, #050816, #111827);
-            font-family: Arial;
-            color: white;
+            background: #F3F4F6;
+            font-family: Arial, sans-serif;
+            color: #111827;
             min-height: 100vh;
-            padding: 20px;
+        }
+
+        .topbar {
+            background: #F59E0B;
+            padding: 18px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
         }
 
         .container {
             max-width: 900px;
             margin: auto;
+            padding: 20px;
         }
 
-        .topo {
-            margin-bottom: 30px;
+        .card {
+            background: white;
+            border-radius: 24px;
+            padding: 26px 18px;
+            border: 2px solid #E5E7EB;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.06);
         }
 
-        .topo h1 {
-            color: #FEA734;
-            font-size: 32px;
+        .titulo {
+            text-align: center;
+            color: #D97706;
+            font-size: 34px;
+            font-weight: bold;
             margin-bottom: 8px;
         }
 
-        .topo p {
-            color: #9ca3af;
+        .subtitulo {
+            text-align: center;
+            color: #6B7280;
+            font-size: 15px;
+            margin-bottom: 25px;
         }
 
         .lista {
@@ -80,14 +105,21 @@ function tipoTransacao($t, $id_usuario) {
             gap: 14px;
         }
 
-        .card {
-            background: #111827;
+        .transacao-card {
+            background: white;
             border-radius: 18px;
             padding: 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 0 15px rgba(0,0,0,0.25);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 2px solid #E5E7EB;
+            transition: 0.3s;
+        }
+
+        .transacao-card:hover {
+            transform: translateY(-2px);
+            border-color: #F59E0B;
         }
 
         .lado-esquerdo {
@@ -104,6 +136,7 @@ function tipoTransacao($t, $id_usuario) {
             justify-content: center;
             align-items: center;
             font-size: 22px;
+            font-weight: bold;
         }
 
         .entrada {
@@ -119,11 +152,12 @@ function tipoTransacao($t, $id_usuario) {
         .info h3 {
             font-size: 16px;
             margin-bottom: 5px;
+            color: #111827;
         }
 
         .info p {
             font-size: 13px;
-            color: #9ca3af;
+            color: #6B7280;
         }
 
         .valor {
@@ -145,25 +179,49 @@ function tipoTransacao($t, $id_usuario) {
 
         .data {
             font-size: 12px;
-            color: #6b7280;
+            color: #9CA3AF;
             margin-top: 4px;
         }
 
         .vazio {
             text-align: center;
-            margin-top: 50px;
-            color: #9ca3af;
+            color: #6B7280;
+            background: #F9FAFB;
+            padding: 40px;
+            border-radius: 18px;
+            border: 2px solid #E5E7EB;
         }
 
-        .voltar {
-            display: inline-block;
+        .acoes {
             margin-top: 30px;
-            color: #FEA734;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .btn {
+            background: white;
+            border: 2px solid #E5E7EB;
+            border-radius: 20px;
+            padding: 18px;
+            text-align: center;
             text-decoration: none;
+            color: #F59E0B;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            border-color: #F59E0B;
+        }
+
+        .voltar-btn {
+            grid-column: 1 / -1;
         }
 
         @media(max-width: 768px) {
-            .card {
+            .transacao-card {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 12px;
@@ -172,85 +230,80 @@ function tipoTransacao($t, $id_usuario) {
             .valor {
                 text-align: left;
             }
+            
+            .titulo {
+                font-size: 28px;
+            }
         }
     </style>
 </head>
 <body>
+
+<div class="topbar">
+    <div class="logo">Multicaixa Express</div>
+</div>
+
 <div class="container">
-    <div class="topo">
-        <h1>Histórico</h1>
-        <p>Movimentações da sua conta</p>
-    </div>
+    <div class="card">
+        <h1 class="titulo">HISTÓRICO</h1>
+        <p class="subtitulo">Movimentações da sua conta</p>
 
-    <?php if (count($transacoes) == 0): ?>
+        <?php if (count($transacoes) == 0): ?>
+            <div class="vazio">Nenhuma transação encontrada.</div>
+        <?php else: ?>
+            <div class="lista">
+                <?php foreach ($transacoes as $t): ?>
+                    <?php
+                        $tipo = tipoTransacao($t, $id_usuario);
+                        $entrada = $tipo == "entrada";
+                    ?>
 
-        <div class="vazio">Nenhuma transação encontrada.</div>
+                    <div class="transacao-card">
+                        <div class="lado-esquerdo">
+                            <div class="icon <?= $tipo ?>"><?= $entrada ? "↓" : "↑" ?></div>
+                            <div class="info">
+                                <?php
+                                    $isPagamento = empty($t["id_destino"]) && str_contains(strtolower($t["descricao"]), "pagamento");
+                                    $isLevantamento = empty($t["id_destino"]) && !$isPagamento;
 
-    <?php else: ?>
+                                    if ($isPagamento) {
+                                        $titulo = "Pagamento";
+                                        $nome = str_replace("Pagamento: ", "", $t["descricao"]);
+                                    }
+                                    elseif ($isLevantamento) {
+                                        $titulo = "Levantamento";
+                                        $nome = str_replace("Levantamento: ", "", $t["descricao"]);
+                                    }
+                                    else {
+                                        $titulo = $entrada ? "Recebido de" : "Enviado para";
+                                        $nome = $entrada ? $t["remetente"] : $t["destinatario"];
+                                    }
+                                ?>
+                                <h3><?= $titulo ?></h3>
+                                <p><?= htmlspecialchars($nome) ?></p>
+                            </div>
+                        </div>
 
-        <div class="lista">
-
-            <?php foreach ($transacoes as $t): ?>
-
-                <?php
-                    $tipo = tipoTransacao($t, $id_usuario);
-                    $entrada = $tipo == "entrada";
-                ?>
-
-                <div class="card">
-                    <div class="lado-esquerdo">
-                        <div class="icon <?= $tipo ?>"><?= $entrada ? "↓" : "↑" ?></div>
-                        <div class="info">
-
-                            <?php
-
-                                $isPagamento = empty($t["id_destino"]) && str_contains(strtolower($t["descricao"]), "pagamento");
-
-                                $isLevantamento = empty($t["id_destino"]) && !$isPagamento;
-
-                                if ($isPagamento) {
-                                    $titulo = "Pagamento";
-                                    $nome = str_replace("Pagamento: ", "", $t["descricao"]);
-                                }
-
-                                elseif ($isLevantamento) {
-                                    $titulo = "Levantamento";
-                                    $nome = str_replace("Levantamento: ", "", $t["descricao"]);
-                                }
-
-                                else {
-                                    $titulo = $entrada ? "Recebido de" : "Enviado para";
-                                    $nome = $entrada ? $t["remetente"] : $t["destinatario"];
-                                }
-
-                            ?>
-
-                            <h3><?= $titulo ?></h3>
-                            <p><?= htmlspecialchars($nome) ?></p>
-
+                        <div class="valor">
+                            <strong class="<?= $tipo ?>-texto">
+                                <?= $entrada ? "+" : "-" ?>
+                                <?= formatarValor($t["valor"]) ?>
+                            </strong>
+                            <div class="data">
+                                <?= date("d/m/Y H:i", strtotime($t["criado_em"])) ?>
+                            </div>
                         </div>
                     </div>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
 
-                    <div class="valor">
-                        <strong class="<?= $tipo ?>-texto">
-                            <?= $entrada ? "+" : "-" ?>
-                            <?= formatarValor($t["valor"]) ?>
-                        </strong>
-
-                        <div class="data">
-                            <?= date("d/m/Y H:i", strtotime($t["criado_em"])) ?>
-                        </div>
-                    </div>
-                </div>
-
-            <?php endforeach; ?>
-
+        <div class="acoes">
+            <a href="dashboard.php" class="btn voltar-btn">
+                Voltar
+            </a>
         </div>
-
-    <?php endif; ?>
-
-    <a href="dashboard.php" class="voltar">← Voltar ao Dashboard</a>
-
+    </div>
 </div>
 
 </body>

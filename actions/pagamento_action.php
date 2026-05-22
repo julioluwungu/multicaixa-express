@@ -128,5 +128,5 @@ $stmt = $conn->prepare($sql);
 $stmt->execute([$id_usuario, $valor, "Pagamento: " . $empresaNome]);
 $conn->commit();
 
-header("Location: ../public/dashboard.php?sucesso=pagamento");
+header("Location: ../public/pagar.php?sucesso=1");
 exit;

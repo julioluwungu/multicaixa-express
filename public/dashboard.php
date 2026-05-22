@@ -10,9 +10,16 @@ if (!isset($_SESSION["id_usuario"])) {
 }
 
 $id = $_SESSION["id_usuario"];
-$sql = "SELECT nome, email, saldo FROM usuarios WHERE id = ?";
+
+$sql = "
+    SELECT nome, email, saldo
+    FROM usuarios
+    WHERE id = ?
+";
+
 $stmt = $conn->prepare($sql);
 $stmt->execute([$id]);
+
 $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
 ?>
@@ -22,159 +29,276 @@ $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Dashboard | Multicaixa Express</title>
+
     <link rel="stylesheet" href="css/style.css">
+
     <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background: #0F172A;
-        }
-
-        .top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .logout-btn {
-            background: #dc2626;
-            color: white;
-            text-decoration: none;
-            padding: 12px 18px;
-            border-radius: 12px;
-            font-weight: bold;
-            transition: 0.3s;
-            white-space: nowrap;
-        }
-
-        .logout-btn:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-        }
-
-        .user {
-            font-size: 14px;
-            color: #CBD5E1;
-        }
-
-        .card-saldo {
-            background: linear-gradient(135deg, #FEA734, #ffb85c);
+            background: #F3F4F6;
+            font-family: Arial, sans-serif;
             color: #111827;
-            padding: 25px;
-            border-radius: 18px;
-            margin-bottom: 20px;
         }
 
-        .saldo-title {
-            font-size: 14px;
-            opacity: 0.8;
+        .topbar {
+            background: #F59E0B;
+            padding: 18px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
         }
 
-        .saldo-value {
-            font-size: 32px;
+        .logo {
+            color: white;
+            font-size: 28px;
             font-weight: bold;
-            margin-top: 5px;
         }
 
-        .grid-actions {
+        .menu-btn {
+            position: absolute;
+            left: 20px;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            user-select: none;
+            transition: 0.2s;
+        }
+
+        .menu-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0,0,0,0.4);
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s;
+            z-index: 998;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: -260px;
+            width: 240px;
+            height: 100vh;
+            background: #fff;
+            box-shadow: 4px 0 20px rgba(0,0,0,0.15);
+            padding-top: 80px;
+            transition: 0.3s ease;
+            z-index: 999;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+
+        .side-menu.active {
+            left: 0;
+        }
+
+        .side-menu a {
+            display: block;
+            padding: 16px 20px;
+            text-decoration: none;
+            color: #DC2626;
+            font-size: 15px;
+            font-weight: bold;
+            border-bottom: 1px solid #F3F4F6;
+            transition: 0.2s;
+        }
+
+        .side-menu a:hover {
+            background: #FEF3C7;
+            padding-left: 25px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .titulo {
+            text-align: center;
+            color: #D97706;
+            margin-bottom: 25px;
+            font-size: 34px;
+            font-weight: bold;
+        }
+
+        .card-area {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .bank-card {
+            width: 100%;
+            max-width: 420px;
+            height: 240px;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.18);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 20px;
+            gap: 18px;
+            margin-top: 20px;
         }
 
-        .action {
-            background: #111827;
-            border: 1px solid rgba(254, 167, 52, 0.15);
-            padding: 18px;
-            border-radius: 14px;
+        .item {
+            background: white;
+            border-radius: 24px;
+            padding: 25px 15px;
             text-align: center;
-            color: white;
+            text-decoration: none;
+            color: #6B7280;
+            border: 2px solid #E5E7EB;
             transition: 0.3s;
-            font-size: 14px;
+            min-height: 170px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
-        .action:hover {
-            background: #FEA734;
-            color: #111827;
+        .item:hover {
+            transform: translateY(-5px);
+            border-color: #F59E0B;
+        }
+
+        .icon-area {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .icon-area img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .item span {
+            font-size: 16px;
             font-weight: bold;
-        }
-
-        .section-title {
-            font-size: 14px;
-            color: #94A3B8;
-            margin: 15px 0 10px;
-        }
-
-        .transacao {
-            background: #111827;
-            padding: 12px;
-            border-radius: 12px;
-            margin-bottom: 10px;
-            border-left: 3px solid #FEA734;
-        }
-
-        .transacao small {
-            color: #94A3B8;
+            color: #F59E0B;
         }
 
         .footer {
             text-align: center;
-            padding: 20px;
-            color: #94A3B8;
-            font-size: 12px;
-            margin-top: 30px;
+            margin-top: 40px;
+            color: #9CA3AF;
+            font-size: 13px;
         }
 
-        @media (max-width: 600px) {
-            .grid-actions {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
     </style>
+
 </head>
+
 <body>
-<div class="container">
-    <div class="top">
-        <div>
-            <h2 style="color:#FEA734;">Olá, <?= htmlspecialchars($usuario["nome"]) ?></h2>
-            <div class="user"><?= htmlspecialchars($usuario["email"]) ?></div>
-        </div>
-        <a href="../actions/logout.php" class="logout-btn">Sair</a>
+
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+<div class="side-menu" id="sideMenu">
+    <a href="../actions/logout.php">Sair da Conta</a>
+</div>
+
+<div class="topbar">
+
+    <div class="menu-btn" onclick="toggleMenu()">
+        ☰
     </div>
-    <div class="card-saldo">
-        <div class="saldo-title">Saldo disponível</div>
-        <div class="saldo-value"><?= number_format($usuario["saldo"], 2, ",", ".") ?> Kz</div>
+
+    <div class="logo">
+        Multicaixa Express
     </div>
-    <div class="grid-actions">
-        <a class="action" href="transferir.php">Transferir</a>
-        <a class="action" href="levantar.php">Levantar</a>
-        <a class="action" href="pagar.php">Pagar</a>
-        <a class="action" href="historico.php">Histórico</a>
-    </div>
-    <div class="section-title">Últimas movimentações</div>
-
-    <?php
-
-        $sql = "SELECT * FROM transacoes 
-                WHERE id_origem = ? OR id_destino = ?
-                ORDER BY criado_em DESC LIMIT 5";
-
-        $stmt = $conn->prepare($sql);
-        $stmt->execute([$id, $id]);
-        $transacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        foreach ($transacoes as $t):
-        ?>
-
-            <div class="transacao">
-                <div><strong><?= number_format($t["valor"], 2, ",", ".") ?> Kz</strong></div>
-                <small><?= htmlspecialchars($t["descricao"]) ?></small>
-            </div>
-
-    <?php endforeach; ?>
 
 </div>
-<footer class="footer">© <?= date("Y") ?> Multicaixa Express</footer>
+
+<div class="container">
+
+    <h1 class="titulo">CARTÃO</h1>
+
+    <div class="card-area">
+        <div class="bank-card">
+            <img src="assets/imagens/cartao-multicaixa.png" class="card-image">
+        </div>
+    </div>
+
+    <div class="grid">
+
+        <a href="transferir.php" class="item">
+            <div class="icon-area">
+                <img src="assets/icones/transferir.png">
+            </div>
+            <span>Transferir</span>
+        </a>
+
+        <a href="pagar.php" class="item">
+            <div class="icon-area">
+                <img src="assets/icones/pagar.png">
+            </div>
+            <span>Pagar</span>
+        </a>
+
+        <a href="historico.php" class="item">
+            <div class="icon-area">
+                <img src="assets/icones/historico.png">
+            </div>
+            <span>Histórico</span>
+        </a>
+
+        <a href="saldo.php" class="item">
+            <div class="icon-area">
+                <img src="assets/icones/consultar-saldo.png">
+            </div>
+            <span>Consultar Saldo</span>
+        </a>
+
+    </div>
+
+    <div class="footer">
+        © <?= date("Y") ?> Multicaixa Express
+    </div>
+
+</div>
+
+<script>
+function toggleMenu() {
+    document.getElementById("sideMenu").classList.toggle("active");
+    document.getElementById("overlay").classList.toggle("active");
+}
+</script>
+
 </body>
 </html>
