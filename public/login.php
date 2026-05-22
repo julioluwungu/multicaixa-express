@@ -120,7 +120,7 @@ $modo = $_GET["modo"] ?? "user";
             padding: 16px;
             border-radius: 14px;
             background: #F59E0B;
-            color: #050816;
+            color: #ffffff;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
@@ -237,9 +237,7 @@ $modo = $_GET["modo"] ?? "user";
                 </a>
             <?php endif; ?>
             
-            <a href="cadastro.php" class="btn btn-full">
-                Ainda não tenho conta
-            </a>
+            <a href="cadastro.php" class="btn btn-full">Ainda não tenho conta</a>
         </div>
     </div>
 </div>

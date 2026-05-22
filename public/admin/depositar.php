@@ -121,7 +121,7 @@ require_once "../../includes/admin_auth.php";
             padding: 16px;
             border-radius: 14px;
             background: #F59E0B;
-            color: #050816;
+            color: #ffffff;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
