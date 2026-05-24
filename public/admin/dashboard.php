@@ -9,6 +9,7 @@ require_once "../../config/database.php";
     <meta charset="UTF-8">
     <title>Admin | Multicaixa Express</title>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="shortcut icon" href="../assets/icones/favicon.ico" type="image/x-icon">
 </head>
 <body>
 <div class="container">

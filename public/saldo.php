@@ -31,6 +31,7 @@ $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consultar Saldo | Multicaixa Express</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="./assets/icones/favicon.ico" type="image/x-icon">
     <style>
         * {
             margin: 0;
