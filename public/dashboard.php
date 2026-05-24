@@ -234,7 +234,6 @@ $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
                 width: 35px;
             }
         }
-
     </style>
 
 </head>
