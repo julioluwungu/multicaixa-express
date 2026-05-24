@@ -64,7 +64,7 @@ $movimentos = $conn->query("
             position: absolute;
             left: 20px;
             color: white;
-            font-size: 28px;
+            font-size: 40px;
             cursor: pointer;
             user-select: none;
             transition: 0.2s;
@@ -292,6 +292,14 @@ $movimentos = $conn->query("
             .titulo {
                 font-size: 28px;
             }
+
+            .logo {
+                font-size: 25px;
+            }
+
+            .logo img {
+                width: 35px;
+            }
             
             .card p {
                 font-size: 28px;
@@ -313,7 +321,7 @@ $movimentos = $conn->query("
 </div>
 
 <div class="topbar">
-    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+    <div class="menu-btn" onclick="toggleMenu()">⋮</div>
     <div class="logo"><img src="../assets/imagens/logo.png" alt="Logo do Multicaixa Express">Multicaixa Express</div>
 </div>
 

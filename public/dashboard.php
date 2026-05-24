@@ -71,7 +71,7 @@ $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
             position: absolute;
             left: 20px;
             color: white;
-            font-size: 28px;
+            font-size: 40px;
             cursor: pointer;
             user-select: none;
             transition: 0.2s;
@@ -225,6 +225,16 @@ $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
             font-size: 13px;
         }
 
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 25px;
+            }
+
+            .logo img {
+                width: 35px;
+            }
+        }
+
     </style>
 
 </head>
@@ -238,7 +248,7 @@ $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 </div>
 
 <div class="topbar">
-    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+    <div class="menu-btn" onclick="toggleMenu()">⋮</div>
     <div class="logo"><img src="./assets/imagens/logo.png" alt="Logo do Multicaixa Express">Multicaixa Express</div>
 </div>
 
